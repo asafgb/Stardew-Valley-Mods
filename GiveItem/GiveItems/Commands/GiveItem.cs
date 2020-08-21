@@ -1,13 +1,17 @@
 ﻿using ChatCommands;
+using ChatCommands.ClassReplacements;
 using ChatCommands.Commands;
 using Commands.Util;
+using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.Menus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Commands.Enums.GameEnums;
 
 namespace Commands.Commands
 {
@@ -21,6 +25,8 @@ namespace Commands.Commands
         public void Handle(string name, string[] args)
         {
             Farmer farm = Game1.player;
+            int itemIndex = -1, itemQulity = 0, itemStack = 1, itemPrice = -1;
+            int result;
             Item item = null;
             //KeyValuePair<int,string> item = Game1.objectInformation.FirstOrDefault(pair => pair.Value.Split('/')[0].Contains(args[1]));
             //Game1.player.addItemToInventoryBool((Item)new StardewValley.Object(item.Key, 1, false, -1, 0), false);
@@ -44,12 +50,49 @@ namespace Commands.Commands
                             }
                             break;
                         case "item":
-                            item = Utils.FindItem(args[0]);
+                        case "i":
+                            //item = Utils.FindItem(args[i + 1]);
+                            itemIndex = Utils.FindItemIndex(args[i + 1]);
+                            break;
+                        case "qu":// Quality
+                                Quality quality = (Quality)Enum.Parse(typeof(Quality), args[i + 1]);
+                                itemQulity = (int)quality;
+                            break;
+                        case "st": // stack
+                            if(int.TryParse(args[i + 1], out result))
+                            {
+                                itemStack = result;
+                            }
+                            break;
+                        case "pr": //price
+                            if (int.TryParse(args[i + 1], out result))
+                            {
+                                itemPrice = result;
+                            }
                             break;
                         default:
                             break;
                     }
                 }
+                if(itemIndex != -1)
+                {
+                    item = (Item)new StardewValley.Object(itemIndex, itemStack, false, itemPrice, itemQulity);
+                    if(farm.addItemToInventoryBool(item))
+                    {
+                        Game1.chatBox.addMessage($"item {item.DisplayName} has been added",Color.Aqua);
+                        //Game1.chatBox.receiveChatMessage()
+                    }
+                }
+                else
+                {
+                    CommandChatBox commandChatBox = Game1.chatBox as CommandChatBox;
+                    commandChatBox.multiplayer.sendChatMessage(LocalizedContentManager.CurrentLanguageCode, "heyyyy", 1);
+                       // commandChatBox.chatBox.mu
+                    ////Game1.chatBox.addMessage($"/{name} item <itemname> qu <4/Iridium> st 25 pr 3000", Color.Aqua);
+                    //Game1.chatBox.addMessage($"Example: /{name} item \"Cave Carrot\" qu Gold st 25 pr 3000", Color.Aqua);
+                }
+                
+
             }
 
 

@@ -10,23 +10,6 @@ namespace Commands.Enums
     {
         public enum Categories
         {
-            //None = 0,
-            //Mineral = -2,
-            //Fish = -4,
-            //Cooking = -7,
-            //Animal_Product = -5,
-            //Crafting = -8,
-            //Resource = -16,
-            //Fertilizer = -19,
-            //Trash = -20,
-            //Bait = -21,
-            //Artisan_Goods = -26,
-            //MonsterLoot = -28,
-            //Seed = -74,
-            //Vegetable = -75,
-            //Fruit = -79,
-            //Flower = -80,
-            //Forage = -81,
             GemCategory = -2,
             FishCategory = -4,
             EggCategory = -5,
@@ -74,6 +57,15 @@ namespace Commands.Enums
             Cooking,
             Seeds,
             Ring,
+        }
+
+
+        public enum Quality
+        {
+            Normal = 0,
+            Silver = 1,
+            Gold= 2,
+            Iridium = 4
         }
     }
 }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\GiveItem.cs" />
+    <Compile Include="Commands\SaidInColor.cs" />
     <Compile Include="Commands\SearchItems.cs" />
     <Compile Include="Enums\GameEnums.cs" />
     <Compile Include="ModConfig.cs" />

@@ -733,7 +733,7 @@ namespace ChatCommands.ClassReplacements
 
         private readonly InputState inputState;
 
-        private readonly Multiplayer multiplayer;
+        public readonly Multiplayer multiplayer;
 
         private readonly List<CommandChatTextBoxState> sentMessageHistory = new List<CommandChatTextBoxState>();
 

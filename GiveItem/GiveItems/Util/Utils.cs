@@ -21,6 +21,13 @@ namespace Commands.Util
                 return (Item)new StardewValley.Object(items[0].Key, 1, false, -1, 0);
             return null;
         }
+        public static int FindItemIndex(string name)
+        {
+            List<KeyValuePair<int, string>> items = Game1.objectInformation.Where(pair => pair.Value.Split('/')[0].ToLower() == name.ToLower()).ToList();
+            if (items.Count == 1)
+                return items[0].Key;
+            return -2;
+        }
 
     }
 }

@@ -26,10 +26,11 @@ namespace Commands
             //helper.Events.Input.ButtonPressed += this.OnButtonPressed;
             //helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
 
-
             //this.Config = this.Helper.ReadConfig<ModConfig>();
             //bool exampleBool = this.Config.ExampleBoolean;
-            
+
+            List<string> AllCommands = GetAllEntities();
+
             List<ICommand> lstcommands = new List<ICommand>
             {
                 //new GiveItem(helper,"giveItem","give specific item",this.Monitor)
@@ -39,6 +40,13 @@ namespace Commands
             {
                 command.Register(helper.ConsoleCommands);
             }
+        }
+
+        public List<string> GetAllEntities()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+                 .Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+                 .Select(x => x.Name).ToList();
         }
 
 
