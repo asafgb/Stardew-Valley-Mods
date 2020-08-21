@@ -29,7 +29,7 @@ namespace Commands
 
             //this.Config = this.Helper.ReadConfig<ModConfig>();
             //bool exampleBool = this.Config.ExampleBoolean;
-
+            
             List<ICommand> lstcommands = new List<ICommand>
             {
                 //new GiveItem(helper,"giveItem","give specific item",this.Monitor)
@@ -46,6 +46,8 @@ namespace Commands
         private void GameLoop_SaveLoaded(object sender, SaveLoadedEventArgs e)
         {
             Game1.chatBox.chatBox.OnEnterPressed += ChatBox_OnEnterPressed;
+            var a = Game1.objectInformation;
+            var b = Game1.clothingInformation;
         }
 
         private void ChatBox_OnEnterPressed(StardewValley.Menus.TextBox sender)

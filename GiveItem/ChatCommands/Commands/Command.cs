@@ -40,18 +40,6 @@ namespace ChatCommands.Commands
 
         public virtual void InvokedCommand(string arg1, string[] arg2) { }
 
-        public virtual void Handle(string input)
-        {
-        }
-
-        public virtual bool CanHandle(string input)
-        {
-            return false;
-        }
-
-        public void Register(ICommandHelper helper)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

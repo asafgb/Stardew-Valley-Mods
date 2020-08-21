@@ -10,5 +10,6 @@ namespace ChatCommands.Commands
     public interface ICommand
     {
         void Register(ICommandHelper helper);
+        void Handle(string name, string[] args);
     }
 }

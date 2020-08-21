@@ -12,19 +12,16 @@ namespace Commands.Commands
 {
     class GiveItem : ICommand
     {
-        private readonly IMonitor monitor;
 
-        public GiveItem(IMonitor monitor) // , ChatCommandsConfig config, NotifyingTextWriter writer
+        public GiveItem() // IMonitor monitor, ChatCommandsConfig config, NotifyingTextWriter writer
         {
-            this.monitor = monitor;
-            
         }
-
 
         private void Handle(string name, string[] args)
         {
+            //KeyValuePair<int,string> item = Game1.objectInformation.FirstOrDefault(pair => pair.Value.Split('/')[0].Contains(args[1]));
+            //Game1.player.addItemToInventoryBool((Item)new StardewValley.Object(item.Key, 1, false, -1, 0), false);
             //this.monitor.Log("yep that worked", LogLevel.Info);
-            Game1.
         }
 
 
@@ -39,5 +36,7 @@ namespace Commands.Commands
         {
             helper.Add("soon", "Toggles displaying console output in the in game chat box.", new Action<string, string[]>(this.Handle));
         }
+
+
     }
 }

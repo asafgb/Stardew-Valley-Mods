@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\GiveItem.cs" />
+    <Compile Include="Commands\SearchItems.cs" />
+    <Compile Include="Enums\GameEnums.cs" />
     <Compile Include="ModConfig.cs" />
     <Compile Include="ModEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
