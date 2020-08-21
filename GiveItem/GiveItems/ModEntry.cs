@@ -23,11 +23,6 @@ namespace Commands
             base.Entry(helper);
 
 
-            //helper.Events.Input.ButtonPressed += this.OnButtonPressed;
-            //helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
-
-            //this.Config = this.Helper.ReadConfig<ModConfig>();
-            //bool exampleBool = this.Config.ExampleBoolean;
 
             List<string> AllCommands = GetAllEntities();
 
