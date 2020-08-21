@@ -1,0 +1,10 @@
+{
+  "Name": "GiveItem",
+  "Author": "Asafgb",
+  "Version": "1.0.0",
+  "Description": "Add commands to gameplay",
+  "UniqueID": "Asafgb.GiveItem",
+  "EntryDll": "Commands.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}

@@ -1,0 +1,10 @@
+{
+  "Name": "ChatCommands",
+  "Author": "Asafgb",
+  "Version": "1.0.0",
+  "Description": "Commands template",
+  "UniqueID": "Asafgb.ChatCommands",
+  "EntryDll": "ChatCommands.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}
