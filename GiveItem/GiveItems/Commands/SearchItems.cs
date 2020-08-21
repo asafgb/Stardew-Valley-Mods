@@ -10,9 +10,14 @@ namespace Commands.Commands
 {
     class SearchItems : ICommand
     {
+        public void Handle(string name, string[] args)
+        {
+            
+        }
+
         public void Register(ICommandHelper helper)
         {
-            throw new NotImplementedException();
+            helper.Add("search", "Search By Categories", new Action<string, string[]>(this.Handle));
         }
     }
 }

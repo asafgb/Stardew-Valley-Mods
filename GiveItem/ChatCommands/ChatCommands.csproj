@@ -49,7 +49,6 @@
     <Compile Include="ClassReplacements\CommandChatTextBoxState.cs" />
     <Compile Include="ClassReplacements\CommandEmojiMenu.cs" />
     <Compile Include="ClassReplacements\ConsoleChatMessage.cs" />
-    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="CommandValidator.cs" />
     <Compile Include="ICommandHandler.cs" />

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using ChatCommands.ClassReplacements;
 using ChatCommands.Commands;
-using ChatCommands.test;
 using ChatCommands.Util;
 using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;

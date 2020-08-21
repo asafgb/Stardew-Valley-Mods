@@ -33,7 +33,7 @@ namespace Commands
             List<ICommand> lstcommands = new List<ICommand>
             {
                 //new GiveItem(helper,"giveItem","give specific item",this.Monitor)
-                new GiveItem(this.Monitor)
+                new GiveItem(),
             };
             foreach (ICommand command in lstcommands)
             {
