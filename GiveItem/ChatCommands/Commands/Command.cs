@@ -8,7 +8,7 @@ using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
 
-namespace ChatCommands
+namespace ChatCommands.Commands
 {
     public class Command : ICommand
     {
@@ -47,6 +47,11 @@ namespace ChatCommands
         public virtual bool CanHandle(string input)
         {
             return false;
+        }
+
+        public void Register(ICommandHelper helper)
+        {
+            throw new NotImplementedException();
         }
     }
 }

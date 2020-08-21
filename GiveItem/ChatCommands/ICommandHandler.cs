@@ -2,7 +2,7 @@
 
 namespace ChatCommands
 {
-    internal interface ICommandHandler
+    public interface ICommandHandler
     {
         void Handle(string input);
         bool CanHandle(string input);

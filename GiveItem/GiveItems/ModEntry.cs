@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ChatCommands;
+using ChatCommands.Commands;
 using ChatCommands.Util;
 using Commands.Commands;
 using Microsoft.Xna.Framework;
@@ -14,32 +15,33 @@ using StardewValley;
 
 namespace Commands
 {
-    public class ModEntry : Mod, ICommand
-    {
-        /// <summary>The mod configuration from the player.</summary>
-        private ModConfig Config;
-        private NotifyingTextWriter consoleNotifier;
+    public class ModEntry : ChatCommandsMod
+    { 
 
-        /*********
-        ** Public methods
-        *********/
-        /// <summary>The mod entry point, called after the mod is first loaded.</summary>
-        /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper helper)
         {
-            helper.Events.Input.ButtonPressed += this.OnButtonPressed;
-            helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+            base.Entry(helper);
 
 
-            List<ICommand> lstcommands = new List<ICommand>
-            {
-                new GiveItem(helper,"giveItem","give specific item",this.Monitor)
-            };
+            //helper.Events.Input.ButtonPressed += this.OnButtonPressed;
+            //helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
 
 
             //this.Config = this.Helper.ReadConfig<ModConfig>();
             //bool exampleBool = this.Config.ExampleBoolean;
+
+            List<ICommand> lstcommands = new List<ICommand>
+            {
+                //new GiveItem(helper,"giveItem","give specific item",this.Monitor)
+                new GiveItem(this.Monitor)
+            };
+            foreach (ICommand command in lstcommands)
+            {
+                command.Register(helper.ConsoleCommands);
+            }
         }
+
+
 
         private void GameLoop_SaveLoaded(object sender, SaveLoadedEventArgs e)
         {
@@ -50,41 +52,6 @@ namespace Commands
         {
             var a=sender.Text;
             //throw new NotImplementedException();
-        }
-
-
-
-        /// <summary>Raised after the player presses a button on the keyboard, controller, or mouse.</summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event data.</param>
-        private void OnButtonPressed(object sender, ButtonPressedEventArgs e)
-        {
-            // ignore if player hasn't loaded a save yet
-            if (!Context.IsWorldReady)
-                return;
-
-            // print button presses to the console window
-           // this.Monitor.Log($"{Game1.player.Name} pressed {e.Button}.", LogLevel.Debug);
-        }
-
-        public void Handle(string input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool CanHandle(string input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InvokedCommand(string arg1, string[] arg2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Register()
-        {
-            throw new NotImplementedException();
         }
     }
 }

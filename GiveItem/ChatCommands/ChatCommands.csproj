@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatCommandsMod.cs" />
     <Compile Include="ClassReplacements\CommandChatBox.cs" />
     <Compile Include="ClassReplacements\CommandChatTextBox.cs" />
     <Compile Include="ClassReplacements\CommandChatTextBoxState.cs" />
@@ -52,11 +53,14 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="CommandValidator.cs" />
     <Compile Include="ICommandHandler.cs" />
+    <Compile Include="ChatCommandsConfig.cs" />
     <Compile Include="NotifyingTextWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test\ListenCommand.cs" />
     <Compile Include="Util\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.json" />
     <None Include="manifest.json" />
     <None Include="packages.config" />
   </ItemGroup>

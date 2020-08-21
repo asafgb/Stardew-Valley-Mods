@@ -5,7 +5,6 @@ using System.Text;
 
 namespace ChatCommands
 {
-    
     public class NotifyingTextWriter : TextWriter
     {
         private readonly NotifyingTextWriter.OnLineWritten callback;

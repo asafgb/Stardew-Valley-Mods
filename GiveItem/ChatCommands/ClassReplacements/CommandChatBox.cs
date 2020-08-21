@@ -11,7 +11,7 @@ using StardewValley;
 using StardewValley.Menus;
 namespace ChatCommands.ClassReplacements
 {
-    internal class CommandChatBox : ChatBox
+    public class CommandChatBox : ChatBox
     {
         public CommandChatBox(IModHelper helper, ICommandHandler handler, ChatCommandsConfig config)
         {

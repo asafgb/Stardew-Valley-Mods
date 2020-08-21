@@ -5,15 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatCommands
+namespace ChatCommands.Commands
 {
     public interface ICommand
     {
-        void Handle(string input);
-
-        bool CanHandle(string input);
-
-        void InvokedCommand(string arg1, string[] arg2);
-        void Register();
+        void Register(ICommandHelper helper);
     }
 }

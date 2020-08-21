@@ -5,7 +5,7 @@ using StardewModdingAPI;
 
 namespace ChatCommands
 {
-    internal class CommandValidator
+    public class CommandValidator
     {
         private readonly object commandHelper;
         private readonly MethodInfo commandHelperGet;

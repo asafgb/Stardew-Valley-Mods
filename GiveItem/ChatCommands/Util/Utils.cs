@@ -10,9 +10,9 @@ using StardewValley.Menus;
 
 namespace ChatCommands.Util
 {
-    internal static class Utils
+    public static class Utils
     {
-        internal static string StripSMAPIPrefix(string input)
+        public static string StripSMAPIPrefix(string input)
         {
             bool flag = input.Length == 0;
             string result;
@@ -30,7 +30,7 @@ namespace ChatCommands.Util
             return result;
         }
 
-        internal static Color ConvertConsoleColorToColor(ConsoleColor color)
+        public static Color ConvertConsoleColorToColor(ConsoleColor color)
         {
             bool flag = color == ConsoleColor.White || color == ConsoleColor.Black;
             Color result;
@@ -54,12 +54,12 @@ namespace ChatCommands.Util
             return result;
         }
 
-        internal static bool ShouldIgnore(string input)
+        public static bool ShouldIgnore(string input)
         {
             return Utils.SuppressConsolePatterns.Any((Regex p) => p.IsMatch(input));
         }
 
-        internal static string[] ParseArgs(string input)
+        public static string[] ParseArgs(string input)
         {
             bool flag = false;
             IList<string> list = new List<string>();
@@ -91,12 +91,12 @@ namespace ChatCommands.Util
                     select item).ToArray<string>();
         }
 
-        internal static ChatSnippet CopyChatSnippet(ChatSnippet snippet)
+        public static ChatSnippet CopyChatSnippet(ChatSnippet snippet)
         {
             return (snippet.message == null) ? new ChatSnippet(snippet.emojiIndex) : new ChatSnippet(snippet.message, LocalizedContentManager.CurrentLanguageCode);
         }
 
-        internal static string EncipherText(string text, long key)
+        public static string EncipherText(string text, long key)
         {
             Random random = new Random((int)key);
             StringBuilder stringBuilder = new StringBuilder();
@@ -107,7 +107,7 @@ namespace ChatCommands.Util
             return string.Concat<char>(stringBuilder.ToString().Reverse<char>());
         }
 
-        internal static string DecipherText(string text, long key)
+        public static string DecipherText(string text, long key)
         {
             Random random = new Random((int)key);
             StringBuilder stringBuilder = new StringBuilder();
@@ -118,7 +118,7 @@ namespace ChatCommands.Util
             return stringBuilder.ToString();
         }
 
-        internal static bool ShouldIncludeColorInfo(List<ChatSnippet> finalText)
+        public static bool ShouldIncludeColorInfo(List<ChatSnippet> finalText)
         {
             bool flag = !string.IsNullOrEmpty(finalText[0].message) && finalText[0].message[0] == '/';
             if (flag)
