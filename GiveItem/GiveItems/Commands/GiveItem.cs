@@ -85,11 +85,10 @@ namespace Commands.Commands
                 }
                 else
                 {
-                    CommandChatBox commandChatBox = Game1.chatBox as CommandChatBox;
-                    commandChatBox.multiplayer.sendChatMessage(LocalizedContentManager.CurrentLanguageCode, "heyyyy", 1);
-                       // commandChatBox.chatBox.mu
-                    ////Game1.chatBox.addMessage($"/{name} item <itemname> qu <4/Iridium> st 25 pr 3000", Color.Aqua);
-                    //Game1.chatBox.addMessage($"Example: /{name} item \"Cave Carrot\" qu Gold st 25 pr 3000", Color.Aqua);
+
+
+                    Game1.chatBox.addMessage($"/{name} item <itemname> qu <4/Iridium> st 25 pr 3000", Color.Aqua);
+                    Game1.chatBox.addMessage($"Example: /{name} item \"Cave Carrot\" qu Gold st 25 pr 3000", Color.Aqua);
                 }
                 
 

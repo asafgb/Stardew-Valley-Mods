@@ -1,4 +1,5 @@
-﻿using StardewValley;
+﻿using ChatCommands.Commands;
+using StardewValley;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,13 @@ namespace Commands.Util
             if (items.Count == 1)
                 return items[0].Key;
             return -2;
+        }
+
+        public static List<string> GetAllEntities()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+                 .Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+                 .Select(x => x.FullName).ToList();
         }
 
     }
