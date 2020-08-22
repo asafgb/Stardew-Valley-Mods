@@ -24,6 +24,7 @@ namespace Commands
             this._helper = helper;
             base.Entry(helper);
             _helper.Events.GameLoop.GameLaunched += GameLoop_GameLaunched;
+            
             List<string> AllCommandsClasses = Utils.GetAllEntities();
 
             foreach (string cls in AllCommandsClasses)
