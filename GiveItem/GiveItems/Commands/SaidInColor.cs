@@ -29,7 +29,7 @@ namespace Commands.Commands
             }
 
             CommandChatBox commandChatBox = Game1.chatBox as CommandChatBox;
-            
+
             commandChatBox.multiplayer.globalChatInfoMessage("Custom.Chat", new[] { message });
 
             commandChatBox.multiplayer.sendChatMessage(LocalizedContentManager.CurrentLanguageCode, message, Game1.player.UniqueMultiplayerID);
