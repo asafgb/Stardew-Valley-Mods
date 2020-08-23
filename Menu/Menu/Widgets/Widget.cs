@@ -5,11 +5,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
+using StardewValley.Menus;
 
-namespace StardewValleyMods.CategorizeChests.Interface.Widgets
+namespace Menu.Widgets
 {
     public class Widget
     {
+        private Widget _Parent;
+        private List<Widget> _Children = new List<Widget>();
+        private int _Width;
+        private int _Height;
+
         public Widget Parent
         {
             get
@@ -94,6 +100,11 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
         {
         }
 
+        public int getChildIndex(Widget child)
+        {
+            return this._Children.IndexOf(child);
+        }
+
         public virtual void Draw(SpriteBatch batch)
         {
             this.DrawChildren(batch);
@@ -166,6 +177,8 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             return this.PropagateScrollWheelAction(amount);
         }
 
+        public bool ShouldMove { get; set; } = true;
+
         protected bool PropagateKeyPress(Keys input)
         {
             using (IEnumerator<Widget> enumerator = this.Children.GetEnumerator())
@@ -223,13 +236,17 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             return false;
         }
 
-        public T AddChild<T>(T child) where T : Widget
+        public T AddChild<T>(T child,int InsertIndex=-1) where T : Widget
         {
             child.Parent = this;
-            this._Children.Add(child);
+            if (InsertIndex >= 0)
+                this._Children.Insert(InsertIndex, child);
+            else
+                this._Children.Add(child);
             this.OnContentsChanged();
             return child;
         }
+
 
         public void RemoveChild(Widget child)
         {
@@ -243,7 +260,6 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             this.RemoveChildren((Widget c) => true);
         }
 
-
         public void RemoveChildren(Predicate<Widget> shouldRemove)
         {
             foreach (Widget widget in this.Children.Where<Widget>((Func<Widget, bool>)(c => shouldRemove(c))))
@@ -254,6 +270,34 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 
         protected virtual void OnContentsChanged()
         {
+        }
+
+        public void PositionButtons(ItemGrabMenu ItemGrMenu)
+        {
+            int MaxWidth = 0;
+            foreach (Widget child in _Children)
+            {
+                MaxWidth = Math.Max(child.Width, MaxWidth);
+            }
+            Widget lastchild = null;
+            foreach (Widget child in _Children)
+            {
+                if (child.ShouldMove)
+                {
+                    if (lastchild == null)
+                    {
+                        child.Position = new Point(ItemGrMenu.xPositionOnScreen + ItemGrMenu.width / 2 - child.Width - 112 * Game1.pixelZoom, ItemGrMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
+                    }
+                    else
+                    {
+                        child.Position = new Point(lastchild.Position.X + lastchild.Width - child.Width, lastchild.Position.Y + lastchild.Height);
+                    }
+                    lastchild = child;
+                }
+            }
+            //this.StashButton.Width = (this.OpenButton.Width = Math.Max(this.StashButton.Width, this.OpenButton.Width));
+            //this.OpenButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.OpenButton.Width - 112 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
+            //this.StashButton.Position = new Point(this.OpenButton.Position.X + this.OpenButton.Width - this.StashButton.Width, this.OpenButton.Position.Y + this.OpenButton.Height);
         }
 
         protected virtual void OnDimensionsChanged()
@@ -272,12 +316,5 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             this.Y = num / 2 - this.Height / 2;
         }
 
-        private Widget _Parent;
-
-        private List<Widget> _Children = new List<Widget>();
-
-        private int _Width;
-
-        private int _Height;
     }
 }

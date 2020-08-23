@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValleyMods.CategorizeChests.Interface.Widgets;
+using Menu.Widgets;
+using Menu.Interfaces;
 
 namespace StardewValleyMods.CategorizeChests.Interface
 {

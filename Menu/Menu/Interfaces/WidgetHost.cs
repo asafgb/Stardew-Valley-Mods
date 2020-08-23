@@ -49,8 +49,5 @@ namespace Menu.Interfaces
         {
             return this.RootWidget.ReceiveScrollWheelAction(amount);
         }
-
-
-
     }
 }

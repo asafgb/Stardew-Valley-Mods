@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
-
+using Menu.Widgets;
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
     internal class Label : Widget

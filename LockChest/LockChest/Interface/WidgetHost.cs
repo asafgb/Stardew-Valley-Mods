@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Menu.Widgets;
 namespace LockChest.Interface
 {
     internal class WidgetHost : InterfaceHost

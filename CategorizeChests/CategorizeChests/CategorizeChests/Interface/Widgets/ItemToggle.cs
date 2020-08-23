@@ -3,7 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardewValleyMods.CategorizeChests.Framework;
-
+using Menu.Widgets;
+using Menu.Interfaces;
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
 		internal class ItemToggle : Widget

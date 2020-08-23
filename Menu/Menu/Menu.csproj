@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E20DB987-E3DA-4B95-BAD2-23B60FD07784}</ProjectGuid>
+    <ProjectGuid>{118B2447-1FF6-4A6D-83B7-6D43F048801C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Menu</RootNamespace>
@@ -52,7 +52,6 @@
     <Compile Include="Widgets\Widget.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="manifest.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

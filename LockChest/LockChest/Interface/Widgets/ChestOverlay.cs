@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Menu.Widgets;
+using Menu;
 
 namespace LockChest.Interface.Widgets
 {
-    internal class ChestOverlay : Widget
+    public class ChestOverlay : Widget
     {
         private readonly ItemGrabMenu ItemGrabMenu;
         private readonly InventoryMenu InventoryMenu;
@@ -53,28 +55,26 @@ namespace LockChest.Interface.Widgets
             }
         }
 
-        private void AddButtons()
+        private void AddButtons(int indexToPut =-1)
         {
             this.LockButton = new TextButton(IsLocked ? "Unlock" : "Lock", Sprites.LeftProtrudingTab);
             this.LockButton.OnPress += LockButton_OnPress;
-            base.AddChild<TextButton>(this.LockButton);
 
-            this.PositionButtons();
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(this.LockButton, indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.PositionButtons(this.ItemGrabMenu);
+            // base.AddChild<TextButton>(this.LockButton);
+
+            //base.PositionButtons(this.ItemGrabMenu);
         }
 
         private void LockButton_OnPress()
         {
             IsLocked = !IsLocked;
             this.LockButton.OnPress -= LockButton_OnPress;
-            base.RemoveChild(this.LockButton);
-            AddButtons();
-        }
-
-        private void PositionButtons()
-        {
-            this.LockButton.Width += 12;
-            this.LockButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.LockButton.Width - 112 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-            //this.StashButton.Position = new Point(this.OpenButton.Position.X + this.OpenButton.Width - this.StashButton.Width, this.OpenButton.Position.Y + this.OpenButton.Height);
+            ChestMenu.Instance.WidgetHost.RootWidget.PositionButtons(this.ItemGrabMenu);
+            int IndexBeforeRemove = ChestMenu.Instance.WidgetHost.RootWidget.getChildIndex(this.LockButton);
+            ChestMenu.Instance.WidgetHost.RootWidget.RemoveChild(this.LockButton);
+            AddButtons(IndexBeforeRemove);
         }
     }
 }

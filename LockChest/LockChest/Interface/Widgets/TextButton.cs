@@ -42,6 +42,7 @@ namespace LockChest.Interface.Widgets
             }
         }
 
+
         public TextButton(string text, NineSlice backgroundTexture)
         {
             this.Label = new Label(text, Color.Black);

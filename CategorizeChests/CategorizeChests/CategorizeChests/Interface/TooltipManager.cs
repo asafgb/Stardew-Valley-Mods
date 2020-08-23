@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardewValleyMods.CategorizeChests.Interface.Widgets;
+using Menu.Widgets;
+using Menu.Interfaces;
 
 namespace StardewValleyMods.CategorizeChests.Interface
 {

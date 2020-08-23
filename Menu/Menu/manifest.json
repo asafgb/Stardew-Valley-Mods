@@ -2,8 +2,8 @@
   "Name": "Menu",
   "Author": "Asafgb",
   "Version": "1.0.0",
-  "Description": "ChestMneu",
-  "UniqueID": "Asafgb.ChestMenu",
+  "Description": "Menu",
+  "UniqueID": "Asafgb.Menu",
   "EntryDll": "Menu.dll",
   "MinimumApiVersion": "3.0.0"
 }

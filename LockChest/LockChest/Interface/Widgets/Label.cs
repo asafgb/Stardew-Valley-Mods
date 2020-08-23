@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Menu.Widgets;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using System;

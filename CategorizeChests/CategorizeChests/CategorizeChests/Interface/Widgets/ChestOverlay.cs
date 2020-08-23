@@ -7,6 +7,9 @@ using StardewValley;
 using StardewValley.Menus;
 using StardewValley.Objects;
 using StardewValleyMods.CategorizeChests.Framework;
+using Menu.Widgets;
+using Menu.Interfaces;
+using Menu;
 
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
@@ -55,19 +58,17 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
         {
             this.OpenButton = new TextButton("Categorize", Sprites.LeftProtrudingTab);
             this.OpenButton.OnPress += this.ToggleMenu;
-            base.AddChild<TextButton>(this.OpenButton);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(this.OpenButton);
+            //base.AddChild<TextButton>(this.OpenButton);
             this.StashButton = new TextButton(this.ChooseStashButtonLabel(), Sprites.LeftProtrudingTab);
             this.StashButton.OnPress += this.StashItems;
-            base.AddChild<TextButton>(this.StashButton);
-            this.PositionButtons();
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(this.StashButton);
+            ChestMenu.Instance.WidgetHost.RootWidget.PositionButtons(this.ItemGrabMenu);
+            //base.AddChild<TextButton>(this.StashButton);
+            //base.PositionButtons(this.ItemGrabMenu);
         }
 
-        private void PositionButtons()
-        {
-            this.StashButton.Width = (this.OpenButton.Width = Math.Max(this.StashButton.Width, this.OpenButton.Width));
-            this.OpenButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.OpenButton.Width - 112 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-            this.StashButton.Position = new Point(this.OpenButton.Position.X + this.OpenButton.Width - this.StashButton.Width, this.OpenButton.Position.Y + this.OpenButton.Height);
-        }
+        
 
         private string ChooseStashButtonLabel()
         {
@@ -96,13 +97,16 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             this.CategoryMenu = new CategoryMenu(chestData, this.ItemDataManager, this.TooltipManager);
             this.CategoryMenu.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.CategoryMenu.Width / 2 - 6 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen - 10 * Game1.pixelZoom);
             this.CategoryMenu.OnClose += this.CloseCategoryMenu;
-            base.AddChild<CategoryMenu>(this.CategoryMenu);
+            this.CategoryMenu.ShouldMove = false;
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<CategoryMenu>(this.CategoryMenu);
+            //base.AddChild<CategoryMenu>(this.CategoryMenu);
             this.SetItemsClickable(false);
         }
 
         private void CloseCategoryMenu()
         {
-            base.RemoveChild(this.CategoryMenu);
+            //base.RemoveChild(this.CategoryMenu);
+            ChestMenu.Instance.WidgetHost.RootWidget.RemoveChild(this.CategoryMenu);
             this.CategoryMenu = null;
             this.SetItemsClickable(true);
         }

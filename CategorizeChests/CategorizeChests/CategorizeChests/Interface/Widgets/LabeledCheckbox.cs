@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Menu.Widgets;
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
 		internal class LabeledCheckbox : Widget

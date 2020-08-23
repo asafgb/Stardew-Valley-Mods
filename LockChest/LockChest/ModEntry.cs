@@ -15,7 +15,6 @@ namespace LockChest
 {
     public class ModEntry : Mod
     {
-        private WidgetHost WidgetHost;
         private Config Config;
         private IChestDataManager ChestDataManager;
         private IChestFinder ChestFinder;
@@ -30,6 +29,7 @@ namespace LockChest
         {
             helper.Events.Display.MenuChanged += Display_MenuChanged;
             helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+            ChestMenu.Instance.InitInstance(helper);
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
@@ -59,43 +59,24 @@ namespace LockChest
             // if closed
             if (e.NewMenu == null && e.OldMenu is ItemGrabMenu)
             {
-                this.ClearMenu();
+                ChestMenu.Instance.ClearMenu();
             }
             // if changed
             else if (e.OldMenu is ItemGrabMenu)
             {
-                this.ClearMenu();
                 ChestMenu.Instance.ClearMenu();
+                ChestMenu.Instance.setRemoveChildrenFlag(true);
             }
             ItemGrabMenu itemGrabMenu;
             if((itemGrabMenu = (e.NewMenu as ItemGrabMenu)) != null) // && ChestMenu.Instance.currentMenu == e.OldMenu
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
+                ChestOverlay child = new ChestOverlay(itemGrabMenu, ChestMenu.Instance.chest, this.Config);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
+                //ChestMenu.Instance.WidgetHost.RootWidget.AddChild(child);
             }
         }
 
 
-        private void CreateMenu(ItemGrabMenu itemGrabMenu)
-        {
-            ItemGrabMenu.behaviorOnItemSelect behaviorOnItemGrab = itemGrabMenu.behaviorOnItemGrab;
-            Chest chest = ((behaviorOnItemGrab != null) ? behaviorOnItemGrab.Target : null) as Chest;
-            if (chest != null)
-            {
-                this.WidgetHost = new WidgetHost(this.Helper);
-                ChestOverlay child = new ChestOverlay(itemGrabMenu, chest, this.Config);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
-                this.WidgetHost.RootWidget.AddChild<ChestOverlay>(child);
-            }
-        }
 
-
-        private void ClearMenu()
-        {
-            WidgetHost widgetHost = this.WidgetHost;
-            if (widgetHost != null)
-            {
-                widgetHost.Dispose();
-            }
-            this.WidgetHost = null;
-        }
     }
 }

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Menu">
+      <HintPath>..\..\Menu\Menu\bin\Debug\Menu.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="Microsoft.Xna.Framework.Graphics" />
     <Reference Include="Newtonsoft.Json">
@@ -81,7 +84,6 @@
     <Compile Include="CategorizeChests\Framework\Persistence\SaveManager.cs" />
     <Compile Include="CategorizeChests\Framework\Persistence\Saver.cs" />
     <Compile Include="CategorizeChests\Interface\InterfaceHost.cs" />
-    <Compile Include="CategorizeChests\Interface\ITooltipManager.cs" />
     <Compile Include="CategorizeChests\Interface\NineSlice.cs" />
     <Compile Include="CategorizeChests\Interface\Sprites.cs" />
     <Compile Include="CategorizeChests\Interface\TextureRegion.cs" />
@@ -98,7 +100,6 @@
     <Compile Include="CategorizeChests\Interface\Widgets\SpriteButton.cs" />
     <Compile Include="CategorizeChests\Interface\Widgets\Stamp.cs" />
     <Compile Include="CategorizeChests\Interface\Widgets\TextButton.cs" />
-    <Compile Include="CategorizeChests\Interface\Widgets\Widget.cs" />
     <Compile Include="CategorizeChests\Interface\Widgets\WrapBag.cs" />
     <Compile Include="CategorizeChests\Utility.cs" />
     <Compile Include="Common\UpdateNotifier.cs" />
