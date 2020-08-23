@@ -9,8 +9,7 @@ using Newtonsoft.Json.Linq;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-
-namespace LockChest.Common
+namespace Menu.Common
 {
     public class UpdateNotifier
     {
@@ -76,7 +75,7 @@ namespace LockChest.Common
 
         private async Task<ISemanticVersion> GetCurrentVersion(string uniqueId)
         {
-            HttpWebRequest httpWebRequest = WebRequest.CreateHttp(this.GetManifestUrl());
+            HttpWebRequest httpWebRequest = WebRequest.CreateHttp(this.GetManifestUrl(uniqueId));
             httpWebRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
             AssemblyName name = typeof(UpdateNotifier).Assembly.GetName();
             httpWebRequest.UserAgent = string.Format("{0}/{1}", name.Name, name.Version);
@@ -95,9 +94,9 @@ namespace LockChest.Common
             return result;
         }
 
-        private string GetManifestUrl()
+        private string GetManifestUrl(string uniqueId)
         {
-            return string.Format(this.gitUrlmanifestJson);
+            return string.Format("");
         }
 
     }

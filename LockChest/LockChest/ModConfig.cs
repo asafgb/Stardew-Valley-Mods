@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LockChest
 {
-    public class Config
+    public class ModConfig
     {
-        public Keys StashKey { get; set; } = Keys.L;
         public bool CheckForUpdates { get; set; } = true;
+        public string GithubUrlForProjectManifest { get; set; } 
     }
 }

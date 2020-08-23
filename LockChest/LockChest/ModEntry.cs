@@ -1,7 +1,9 @@
-﻿using LockChest.Frameworks;
+﻿using LockChest.Common;
+using LockChest.Frameworks;
 using LockChest.Interface;
 using LockChest.Interface.Widgets;
 using Menu;
+using Menu.Common;
 using StardewModdingAPI;
 using StardewValley.Menus;
 using StardewValley.Objects;
@@ -15,7 +17,7 @@ namespace LockChest
 {
     public class ModEntry : Mod
     {
-        private Config Config;
+        private ModConfig Config;
         private IChestDataManager ChestDataManager;
         private IChestFinder ChestFinder;
         private IChestFiller ChestFiller;
@@ -30,6 +32,13 @@ namespace LockChest
             helper.Events.Display.MenuChanged += Display_MenuChanged;
             helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
             ChestMenu.Instance.InitInstance(helper);
+
+            this.Config = this.Helper.ReadConfig<ModConfig>();
+
+            if (this.Config.CheckForUpdates)
+            {
+                new UpdateNotifier(base.Monitor, helper, this.Config.GithubUrlForProjectManifest).Check(base.ModManifest);
+            }
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)

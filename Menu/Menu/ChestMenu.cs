@@ -1,4 +1,5 @@
-﻿using Menu.Interfaces;
+﻿using Menu.Common;
+using Menu.Interfaces;
 using StardewModdingAPI;
 using StardewValley.Menus;
 using StardewValley.Objects;
@@ -15,6 +16,7 @@ namespace Menu
     {
         private IModHelper Helper;
         private Mutex mut = new Mutex();
+        private Config Config;
 
 
         public Chest chest { get; private set; }
@@ -25,7 +27,12 @@ namespace Menu
 
         public ChestMenu()
         {
+            //this.Config = this.Helper.ReadConfig<Config>();
 
+            //if (this.Config.CheckForUpdates)
+            //{
+            //    new UpdateNotifier(base.Monitor, helper, this.Config.GithubUrlForProjectManifest).Check(base.ModManifest);
+            //}
         }
 
         public void setRemoveChildrenFlag(bool request)
@@ -38,6 +45,7 @@ namespace Menu
             if(this.Helper == null)
             {
                 this.Helper = helper;
+                
                 this.Helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
             }
         }

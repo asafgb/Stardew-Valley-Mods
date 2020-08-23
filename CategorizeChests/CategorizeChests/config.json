@@ -1,0 +1,5 @@
+{
+  "CheckForUpdates": true,
+  "GithubUrlForProjectManifest": "https://raw.githubusercontent.com/asafgb/Stardew-Valley-Mods/master/GiveItem/GiveItems/manifest.json",
+  "StashKey": 76
+}

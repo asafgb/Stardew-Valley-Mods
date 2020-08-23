@@ -32,7 +32,7 @@ namespace StardewValleyMods.CategorizeChests
             ChestMenu.Instance.InitInstance(helper);
             if (this.Config.CheckForUpdates)
             {
-                new UpdateNotifier(base.Monitor, helper).Check(base.ModManifest);
+                new UpdateNotifier(base.Monitor, helper,this.Config.GithubUrlForProjectManifest).Check(base.ModManifest);
             }
             this.SaveDirectory = Path.Combine(base.Helper.DirectoryPath, "savedata");
             if (!Directory.Exists(this.SaveDirectory))

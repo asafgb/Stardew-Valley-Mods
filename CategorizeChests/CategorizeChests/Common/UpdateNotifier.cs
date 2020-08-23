@@ -12,16 +12,17 @@ using StardewValley;
 
 namespace StardewValleyMods.Common
 {
-    internal class UpdateNotifier
+    public class UpdateNotifier
     {
-        IModHelper Helper;
+        private IModHelper Helper;
         private readonly IMonitor Monitor;
-        private string gitUrlmanifestJson = "https://raw.githubusercontent.com/asafgb/Stardew-Valley-Mods/master/GiveItem/GiveItems/manifest.json";
+        private string gitUrlmanifestJson;//= "";
 
-        public UpdateNotifier(IMonitor monitor, IModHelper Helper)
+        public UpdateNotifier(IMonitor monitor, IModHelper Helper, string Url)
         {
             this.Monitor = monitor;
             this.Helper = Helper;
+            this.gitUrlmanifestJson = Url;
         }
 
         public async void Check(IManifest manifest)
@@ -48,10 +49,10 @@ namespace StardewValleyMods.Common
             string message = string.Format("A new version of {0} is available!", modName);
             this.Monitor.Log(message, LogLevel.Alert);
             Helper.Events.GameLoop.SaveLoaded += (sender, e) => { this.ShowHudMessage(message); };
-           
+
         }
 
-       
+
 
         private void NotifyUpToDate(string modName)
         {
@@ -75,7 +76,7 @@ namespace StardewValleyMods.Common
 
         private async Task<ISemanticVersion> GetCurrentVersion(string uniqueId)
         {
-            HttpWebRequest httpWebRequest = WebRequest.CreateHttp(this.GetManifestUrl(uniqueId));
+            HttpWebRequest httpWebRequest = WebRequest.CreateHttp(this.GetManifestUrl());
             httpWebRequest.CachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
             AssemblyName name = typeof(UpdateNotifier).Assembly.GetName();
             httpWebRequest.UserAgent = string.Format("{0}/{1}", name.Name, name.Version);
@@ -94,9 +95,9 @@ namespace StardewValleyMods.Common
             return result;
         }
 
-        private string GetManifestUrl(string uniqueId)
+        private string GetManifestUrl()
         {
-            return string.Format("");
+            return string.Format(this.gitUrlmanifestJson);
         }
 
     }
