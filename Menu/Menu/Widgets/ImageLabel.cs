@@ -22,10 +22,9 @@ namespace Menu.Widgets
 
         public override void Draw(SpriteBatch batch)
         {
-            
             if (this.IsHover)
             {
-                Index = (Index + 0.25) % 10;
+                Index = Index + 0.25 > 10 ? -4 : Index + 0.25;//(Index + 0.25) % 10;
                 batch.Draw(Game1.mouseCursors, new Rectangle(base.GlobalPosition.X, base.GlobalPosition.Y+ (int)Index, base.Width, base.Height), new Rectangle(421, 472, 12, 12), Color.Red);
                 //batch.Draw(Game1.mouseCursors, new Rectangle(Index*20, Index*30, base.Width, base.Height), new Rectangle(421, 472, 12, 12), Color.Red);
             }

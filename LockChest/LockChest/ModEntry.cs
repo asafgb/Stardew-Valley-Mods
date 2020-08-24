@@ -18,11 +18,6 @@ namespace LockChest
     public class ModEntry : Mod
     {
         private ModConfig Config;
-        private IChestDataManager ChestDataManager;
-        private IChestFinder ChestFinder;
-        private IChestFiller ChestFiller;
-        private IItemDataManager ItemDataManager;
-        //private ISaveManager SaveManager;
         private string SaveDirectory;
         private string SavePath;
 

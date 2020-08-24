@@ -46,29 +46,53 @@ namespace Menu.Widgets
                     widget.Draw(batch);
                 }
             }
-            else
+            else if (this.Children.Count >0)
             {
                 PositionButtons(this.menu, MaxWidgetDispay);
                 Widget lastChild = this.Children[CurrentPrintIndex % this.Children.Count];
-                int Counter =  MaxWidgetDispay;
-                for (int i = CurrentPrintIndex; Counter > 0; i++)
-                {
-                    if (this.Children[i % this.Children.Count].ShouldMove)
-                    {
-                        Counter--;
-                        lastChild = this.Children[i % this.Children.Count];
-                        lastChild.Draw(batch);
+                int i = CurrentPrintIndex;
+                int CounterToDisplay = MaxWidgetDispay;
 
-                    }
-                    else
+                do
+                {
+                    if (!this.Children[i % this.Children.Count].ShouldMove)
                     {
                         this.Children[i % this.Children.Count].Draw(batch);
                     }
-                }
-                CurrentPrintIndex %= this.Children.Count;
+                    else if (CounterToDisplay > 0)
+                    {
+                        CounterToDisplay--;
+                        lastChild = this.Children[i % this.Children.Count];
+                        lastChild.Draw(batch);
+                    }
+                    i++;
+                } while (i < CurrentPrintIndex + this.Children.Count);
 
+                CurrentPrintIndex %= this.Children.Count;
                 PlaceTheButton(DownArrow, lastChild);
                 DownArrow.Draw(batch);
+
+
+                //PositionButtons(this.menu, MaxWidgetDispay);
+                //Widget lastChild = this.Children[CurrentPrintIndex % this.Children.Count];
+                //int CounterToDisplay =  MaxWidgetDispay;
+                //for (int i = CurrentPrintIndex; CounterToDisplay>0; i++)
+                //{
+                //    if (this.Children[i % this.Children.Count].ShouldMove && CounterToDisplay>0)
+                //    {
+                //        CounterToDisplay--;
+                //        lastChild = this.Children[i % this.Children.Count];
+                //        lastChild.Draw(batch);
+
+                //    }
+                //    else
+                //    {
+                //        this.Children[i % this.Children.Count].Draw(batch);
+                //    }
+                //}
+                //CurrentPrintIndex %= this.Children.Count;
+                //PlaceTheButton(DownArrow, lastChild);
+                //DownArrow.Draw(batch);
             }
         }
 
@@ -130,8 +154,9 @@ namespace Menu.Widgets
         public override bool ReceiveCursorHover(Point point)
         {
             Point point2 = new Point(point.X - DownArrow.Position.X, point.Y - DownArrow.Position.Y);
-
-            return DownArrow.ReceiveCursorHover(point2) || base.ReceiveCursorHover(point);
+            bool isHover = DownArrow.ReceiveCursorHover(point2);
+            isHover = base.ReceiveCursorHover(point) || isHover;
+            return isHover;
         }
 
         public override bool ReceiveLeftClick(Point point)

@@ -27,12 +27,6 @@ namespace Menu
 
         public ChestMenu()
         {
-            //this.Config = this.Helper.ReadConfig<Config>();
-
-            //if (this.Config.CheckForUpdates)
-            //{
-            //    new UpdateNotifier(base.Monitor, helper, this.Config.GithubUrlForProjectManifest).Check(base.ModManifest);
-            //}
         }
 
         public void setRemoveChildrenFlag(bool request)

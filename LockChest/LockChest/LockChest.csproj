@@ -63,14 +63,10 @@
     <Compile Include="Frameworks\ItemDataManager.cs" />
     <Compile Include="Frameworks\ItemKey.cs" />
     <Compile Include="Frameworks\ItemType.cs" />
-    <Compile Include="Interface\IChestDataManager.cs" />
-    <Compile Include="Interface\IChestFiller.cs" />
-    <Compile Include="Interface\IChestFinder.cs" />
-    <Compile Include="Interface\IItemDataManager.cs" />
-    <Compile Include="Interface\TextureRegion.cs" />
     <Compile Include="Interface\Widgets\ChestOverlay.cs" />
     <Compile Include="ModEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="הערות.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json">
