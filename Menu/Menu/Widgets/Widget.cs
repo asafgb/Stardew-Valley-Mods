@@ -15,6 +15,8 @@ namespace Menu.Widgets
         private List<Widget> _Children = new List<Widget>();
         private int _Width;
         private int _Height;
+        private int MaxWidgetDispay { get; set; } = 3;
+        private int CurrentPrintIndex { get; set; } = 0;
 
         public Widget Parent
         {
@@ -112,9 +114,22 @@ namespace Menu.Widgets
 
         protected void DrawChildren(SpriteBatch batch)
         {
-            foreach (Widget widget in this.Children)
+            if (MaxWidgetDispay < 0)
             {
-                widget.Draw(batch);
+                foreach (Widget widget in this.Children)
+                {
+                    widget.Draw(batch);
+                }
+            }
+            else
+            {
+                for (int i= CurrentPrintIndex;i< CurrentPrintIndex+MaxWidgetDispay;i++)
+                {
+                    this._Children[i % this._Children.Count].Draw(batch);
+                }
+                // add to list
+                //print
+                //remove from list
             }
         }
 

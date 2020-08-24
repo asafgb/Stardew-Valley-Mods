@@ -1,11 +1,13 @@
-﻿using System;
+﻿
+using System;
+using Menu.Interfaces;
 using Menu.Widgets;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LockChest.Interface.Widgets
+namespace Menu.Widgets
 {
-    internal class Background : Widget
+    public class Background : Widget
     {
         public Background(NineSlice nineSlice)
         {

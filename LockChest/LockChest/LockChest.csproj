@@ -66,16 +66,8 @@
     <Compile Include="Interface\IChestFiller.cs" />
     <Compile Include="Interface\IChestFinder.cs" />
     <Compile Include="Interface\IItemDataManager.cs" />
-    <Compile Include="Interface\InterfaceHost.cs" />
-    <Compile Include="Interface\NineSlice.cs" />
-    <Compile Include="Interface\Sprites.cs" />
     <Compile Include="Interface\TextureRegion.cs" />
-    <Compile Include="Interface\WidgetHost.cs" />
-    <Compile Include="Interface\Widgets\Background.cs" />
-    <Compile Include="Interface\Widgets\Button.cs" />
     <Compile Include="Interface\Widgets\ChestOverlay.cs" />
-    <Compile Include="Interface\Widgets\Label.cs" />
-    <Compile Include="Interface\Widgets\TextButton.cs" />
     <Compile Include="ModEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LockChest.Interface
+namespace Menu.Interfaces
 {
-    class NineSlice
+    public class NineSlice
     {
         public TextureRegion Center;
         public TextureRegion Top;

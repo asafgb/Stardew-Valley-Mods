@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Menu.Widgets;
 using Menu;
+using Menu.Interfaces;
 
 namespace LockChest.Interface.Widgets
 {
@@ -61,6 +62,13 @@ namespace LockChest.Interface.Widgets
             this.LockButton.OnPress += LockButton_OnPress;
 
             ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(this.LockButton, indexToPut);
+
+
+          
+
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test1", Sprites.LeftProtrudingTab), indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test2", Sprites.LeftProtrudingTab), indexToPut);
+
             ChestMenu.Instance.WidgetHost.RootWidget.PositionButtons(this.ItemGrabMenu);
             // base.AddChild<TextButton>(this.LockButton);
 

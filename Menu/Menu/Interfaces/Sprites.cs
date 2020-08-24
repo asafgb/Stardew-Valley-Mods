@@ -1,11 +1,15 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace LockChest.Interface
+namespace Menu.Interfaces
 {
-    internal static class Sprites
+    public static class Sprites
     {
         public static readonly TextureRegion LeftArrow = new TextureRegion(Game1.mouseCursors, new Rectangle(8, 268, 44, 40));
         public static readonly TextureRegion RightArrow = new TextureRegion(Game1.mouseCursors, new Rectangle(12, 204, 44, 40));
@@ -74,6 +78,6 @@ namespace LockChest.Interface
             Center = new TextureRegion(Game1.mouseCursors, new Rectangle(661, 68, 1, 1), true)
         };
 
-     
+
     }
 }

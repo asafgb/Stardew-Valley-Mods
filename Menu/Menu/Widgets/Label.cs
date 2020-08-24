@@ -1,5 +1,4 @@
-﻿using Menu.Widgets;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using System;
@@ -8,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LockChest.Interface.Widgets
+namespace Menu.Widgets
 {
-    internal class Label : Widget
+    public class Label : Widget
     {
         private string _Text;
         public readonly SpriteFont Font;
@@ -52,6 +51,6 @@ namespace LockChest.Interface.Widgets
             base.Height = (int)vector.Y;
         }
 
-       
+
     }
 }

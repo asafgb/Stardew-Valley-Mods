@@ -1,10 +1,9 @@
-﻿
-
+﻿using Menu.Interfaces;
 using Microsoft.Xna.Framework;
 
-namespace LockChest.Interface.Widgets
+namespace Menu.Widgets
 {
-    internal class TextButton : Button
+    public class TextButton : Button
     {
         private readonly Background Background;
 

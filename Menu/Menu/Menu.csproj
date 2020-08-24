@@ -53,9 +53,17 @@
     <Compile Include="Common\Config.cs" />
     <Compile Include="Interfaces\InterfaceHost.cs" />
     <Compile Include="Interfaces\ITooltipManager.cs" />
+    <Compile Include="Interfaces\NineSlice.cs" />
+    <Compile Include="Interfaces\Sprites.cs" />
+    <Compile Include="Interfaces\TextButton.cs" />
+    <Compile Include="Interfaces\TextureRegion.cs" />
     <Compile Include="Interfaces\TooltipManager.cs" />
     <Compile Include="Interfaces\WidgetHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Widgets\Background.cs" />
+    <Compile Include="Widgets\Button.cs" />
+    <Compile Include="Widgets\Label.cs" />
+    <Compile Include="Widgets\TextButton.cs" />
     <Compile Include="Widgets\Widget.cs" />
   </ItemGroup>
   <ItemGroup>
