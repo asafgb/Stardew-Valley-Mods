@@ -63,6 +63,7 @@
     <Compile Include="Widgets\Background.cs" />
     <Compile Include="Widgets\Button.cs" />
     <Compile Include="Widgets\Label.cs" />
+    <Compile Include="Widgets\LeftMenu.cs" />
     <Compile Include="Widgets\TextButton.cs" />
     <Compile Include="Widgets\Widget.cs" />
   </ItemGroup>

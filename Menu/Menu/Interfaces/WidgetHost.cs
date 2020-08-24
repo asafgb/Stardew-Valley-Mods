@@ -15,7 +15,7 @@ namespace Menu.Interfaces
 
         public WidgetHost(IModHelper helper) : base(helper, null)
         {
-            this.RootWidget = new Widget
+            this.RootWidget = new LeftMenu
             {
                 Width = Game1.viewport.Width,
                 Height = Game1.viewport.Height

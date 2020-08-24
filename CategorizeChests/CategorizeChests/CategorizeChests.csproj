@@ -36,13 +36,8 @@
     <Reference Include="Menu">
       <HintPath>..\..\Menu\Menu\bin\Debug\Menu.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="Microsoft.Xna.Framework.Graphics" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Stardew\u0020Valley">
-      <HintPath>E:\Steam\steamapps\common\Stardew Valley\Stardew Valley.exe</HintPath>
     </Reference>
     <Reference Include="StardewModdingAPI">
       <HintPath>E:\Steam\steamapps\common\Stardew Valley\StardewModdingAPI.exe</HintPath>

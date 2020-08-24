@@ -18,9 +18,6 @@ namespace Menu.Widgets
         private int _Height;
 
 
-        private int MaxWidgetDispay { get; set; } = 3;
-        private int CurrentPrintIndex { get; set; } = 0;
-        private ItemGrabMenu menu = null;
 
         public Widget Parent
         {
@@ -35,7 +32,7 @@ namespace Menu.Widgets
             }
         }
 
-        public IEnumerable<Widget> Children
+        public List<Widget> Children
         {
             get
             {
@@ -116,38 +113,11 @@ namespace Menu.Widgets
             this.DrawChildren(batch);
         }
 
-        protected void DrawChildren(SpriteBatch batch)
+        protected virtual void DrawChildren(SpriteBatch batch)
         {
-            if (MaxWidgetDispay < 0 || this._Children.Count< MaxWidgetDispay)
+            foreach (Widget widget in this.Children)
             {
-                foreach (Widget widget in this.Children)
-                {
-                    widget.Draw(batch);
-                }
-            }
-            else
-            {
-                int Counter = CurrentPrintIndex + MaxWidgetDispay;
-                for (int i= CurrentPrintIndex;Counter>0;i++)
-                {
-                    if (this._Children[i % this._Children.Count].ShouldMove)
-                    {
-                        Counter--;
-                        this._Children[i % this._Children.Count].Draw(batch);
-                    }
-                    else
-                    {
-                        this._Children[i % this._Children.Count].Draw(batch);
-                    }
-                }
-                TextButton DownArrow = new TextButton("down", Sprites.LeftProtrudingTab);
-                this.AddChild(DownArrow);
-                //this.PositionRelativeButtons(this.menu);
-                DownArrow.Draw(batch);
-                this.RemoveChild(DownArrow);
-                // add to list
-                //print
-                //remove from list
+                widget.Draw(batch);
             }
         }
 
@@ -303,66 +273,6 @@ namespace Menu.Widgets
 
         protected virtual void OnContentsChanged()
         {
-        }
-
-        //public void PositionRelativeButtons(ItemGrabMenu ItemGrMenu)
-        //{
-        //    //int MaxWidth = maxWidthOfChildren
-
-        //    int Counter = CurrentPrintIndex + MaxWidgetDispay;
-        //    Widget child,lastchild = null;
-        //    for (int i = CurrentPrintIndex; Counter > 0; i++)
-        //    {
-        //        child = this._Children[i % this._Children.Count];
-        //        if (child.ShouldMove)
-        //        {
-        //            if (lastchild == null)
-        //            {
-        //                child.Position = new Point(ItemGrMenu.xPositionOnScreen + ItemGrMenu.width / 2 - child.Width - 112 * Game1.pixelZoom, ItemGrMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-        //            }
-        //            else
-        //            {
-        //                child.Position = new Point(lastchild.Position.X + lastchild.Width - child.Width, lastchild.Position.Y + lastchild.Height);
-        //            }
-        //            lastchild = child;
-        //        }
-        //    }
-        //}
-
-        //private int maxWidthOfChildren()
-        //{
-        //    int MaxWidth = 0;
-        //    foreach (Widget child in _Children)
-        //    {
-        //        if(child.ShouldMove)
-        //        MaxWidth = Math.Max(child.Width, MaxWidth);
-        //    }
-        //    return MaxWidth;
-        //}
-
-        public void PositionButtons(ItemGrabMenu ItemGrMenu)
-        {
-            this.menu = ItemGrMenu;
-          
-            Widget lastchild = null;
-            foreach (Widget child in _Children)
-            {
-                if (child.ShouldMove)
-                {
-                    if (lastchild == null)
-                    {
-                        child.Position = new Point(ItemGrMenu.xPositionOnScreen + ItemGrMenu.width / 2 - child.Width - 112 * Game1.pixelZoom, ItemGrMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-                    }
-                    else
-                    {
-                        child.Position = new Point(lastchild.Position.X + lastchild.Width - child.Width, lastchild.Position.Y + lastchild.Height);
-                    }
-                    lastchild = child;
-                }
-            }
-            //this.StashButton.Width = (this.OpenButton.Width = Math.Max(this.StashButton.Width, this.OpenButton.Width));
-            //this.OpenButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.OpenButton.Width - 112 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-            //this.StashButton.Position = new Point(this.OpenButton.Position.X + this.OpenButton.Width - this.StashButton.Width, this.OpenButton.Position.Y + this.OpenButton.Height);
         }
 
         protected virtual void OnDimensionsChanged()

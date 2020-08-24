@@ -63,7 +63,7 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             this.StashButton = new TextButton(this.ChooseStashButtonLabel(), Sprites.LeftProtrudingTab);
             this.StashButton.OnPress += this.StashItems;
             ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(this.StashButton);
-            ChestMenu.Instance.WidgetHost.RootWidget.PositionButtons(this.ItemGrabMenu);
+            ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).PositionButtons(this.ItemGrabMenu);
             //base.AddChild<TextButton>(this.StashButton);
             //base.PositionButtons(this.ItemGrabMenu);
         }
