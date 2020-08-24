@@ -48,7 +48,7 @@ namespace Menu.Interfaces
 
         private void Input_CursorMoved(object sender, CursorMovedEventArgs e)
         {
-            Point newPosition = new Point((int)e.NewPosition.AbsolutePixels.X, (int)e.NewPosition.AbsolutePixels.Y);
+            Point newPosition = new Point((int)e.NewPosition.ScreenPixels.X, (int)e.NewPosition.ScreenPixels.Y);
             bool flag = this.ReceiveCursorHover(newPosition.X, newPosition.Y);
             if (flag)
             {

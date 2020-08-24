@@ -129,14 +129,16 @@ namespace Menu.Widgets
 
         public override bool ReceiveCursorHover(Point point)
         {
-            return base.ReceiveCursorHover(point);//|| true;
+            Point point2 = new Point(point.X - DownArrow.Position.X, point.Y - DownArrow.Position.Y);
+
+            return DownArrow.ReceiveCursorHover(point2) || base.ReceiveCursorHover(point);
         }
 
         public override bool ReceiveLeftClick(Point point)
         {
             Point point2 = new Point(point.X - DownArrow.Position.X, point.Y - DownArrow.Position.Y);
            
-            return DownArrow.LocalBounds.Contains(point2) && DownArrow.ReceiveLeftClick(point2) || base.ReceiveLeftClick(point) ;
+            return DownArrow.ReceiveLeftClick(point2) || base.ReceiveLeftClick(point) ;
             //return base.ReceiveLeftClick(new Point(x, y));
         }
 

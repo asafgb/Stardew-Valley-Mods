@@ -16,6 +16,7 @@ namespace Menu.Widgets
         private List<Widget> _Children = new List<Widget>();
         private int _Width;
         private int _Height;
+        
 
 
 
@@ -31,6 +32,8 @@ namespace Menu.Widgets
                 this.OnParent(value);
             }
         }
+
+        public bool IsHover { get; set; } = false;
 
         public List<Widget> Children
         {
@@ -228,15 +231,16 @@ namespace Menu.Widgets
 
         protected bool PropagateCursorHover(Point point)
         {
+            bool isHover = false;
             foreach (Widget widget in this.Children)
             {
                 Point point2 = new Point(point.X - widget.Position.X, point.Y - widget.Position.Y);
-                if (widget.LocalBounds.Contains(point2) && widget.ReceiveCursorHover(point2))
+                if (widget.ReceiveCursorHover(point2))
                 {
-                    return true;
+                    isHover = true;
                 }
             }
-            return false;
+            return isHover;
         }
 
         public T AddChild<T>(T child,int InsertIndex=-1) where T : Widget

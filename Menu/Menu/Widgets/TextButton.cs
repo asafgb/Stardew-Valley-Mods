@@ -44,6 +44,7 @@ namespace Menu.Widgets
 
         public TextButton(string text, NineSlice backgroundTexture)
         {
+            this.OnHover += TextButton_OnHover;
             this.Label = new Label(text, Color.Black);
             this.Background = new Background(backgroundTexture);
             base.Width = (this.Background.Width = this.Label.Width + this.LeftPadding + this.RightPadding);
@@ -51,6 +52,11 @@ namespace Menu.Widgets
             base.AddChild<Background>(this.Background);
             base.AddChild<Label>(this.Label);
             this.CenterLabel();
+        }
+
+        private void TextButton_OnHover(Widget obj)
+        {
+            this.Label.IsHover = obj.IsHover;
         }
 
         protected override void OnDimensionsChanged()

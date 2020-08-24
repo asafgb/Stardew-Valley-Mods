@@ -48,6 +48,7 @@ namespace Menu.Widgets
         public PngButton(NineSlice backgroundTexture)
         {
             //this.Label = new Label(text, Color.Black);
+            this.OnHover += PngButton_OnHover;
             this.Background = new Background(backgroundTexture);
             this.imageLabel = new ImageLabel();
             base.Width = (this.Background.Width = this.imageLabel.Width + this.LeftPadding + this.RightPadding);
@@ -55,6 +56,11 @@ namespace Menu.Widgets
             base.AddChild<Background>(this.Background);
             base.AddChild<ImageLabel>(this.imageLabel);
             this.CenterLabel();
+        }
+
+        private void PngButton_OnHover(Widget obj)
+        {
+            this.imageLabel.IsHover = obj.IsHover;
         }
 
         protected override void OnDimensionsChanged()
@@ -75,5 +81,13 @@ namespace Menu.Widgets
         {
             this.imageLabel.Position = new Point(this.LeftPadding + (base.Width - this.RightPadding - this.LeftPadding) / 2 - this.imageLabel.Width / 2, this.TopPadding + (base.Height - this.BottomPadding - this.TopPadding) / 2 - this.imageLabel.Height / 2);
         }
+
+        //public override bool ReceiveCursorHover(Point point)
+        //{
+            
+        //    this.IsHover = this.LocalBounds.Contains(point);
+        //    return this.LocalBounds.Contains(point);
+        //}
+
     }
 }

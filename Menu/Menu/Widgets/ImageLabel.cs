@@ -13,6 +13,7 @@ namespace Menu.Widgets
 {
     public class ImageLabel : Widget
     {
+        Double Index = 0;
        // Texture2D tex;
         public ImageLabel()
         {
@@ -21,11 +22,17 @@ namespace Menu.Widgets
 
         public override void Draw(SpriteBatch batch)
         {
-            //batch.DrawString(this.Font, this.Text, new Vector2((float)base.GlobalPosition.X, (float)base.GlobalPosition.Y), this.Color);
-            //batch.Draw(tex, new Vector2((float)base.GlobalPosition.X, (float)base.GlobalPosition.Y), Color.White);
-            //batch.Draw(Game1.mouseCursors, new Rectangle(421, 459, 12, 12), new Rectangle(base.GlobalPosition.X, base.GlobalPosition.Y, base.Width, base.Height), Color.White);
-            batch.Draw(Game1.mouseCursors, new Rectangle(base.GlobalPosition.X, base.GlobalPosition.Y, base.Width, base.Height), new Rectangle(421, 472, 12, 12),  Color.White);
-            //throw new Exception("asaf");
+            
+            if (this.IsHover)
+            {
+                Index = (Index + 0.25) % 10;
+                batch.Draw(Game1.mouseCursors, new Rectangle(base.GlobalPosition.X, base.GlobalPosition.Y+ (int)Index, base.Width, base.Height), new Rectangle(421, 472, 12, 12), Color.Red);
+                //batch.Draw(Game1.mouseCursors, new Rectangle(Index*20, Index*30, base.Width, base.Height), new Rectangle(421, 472, 12, 12), Color.Red);
+            }
+            else
+            {
+                batch.Draw(Game1.mouseCursors, new Rectangle(base.GlobalPosition.X, base.GlobalPosition.Y, base.Width, base.Height), new Rectangle(421, 472, 12, 12), Color.White);
+            }
         }
 
         private void RecalculateDimensions()
@@ -34,6 +41,7 @@ namespace Menu.Widgets
             base.Height = (int)13*2;
         }
 
-       
+      
+
     }
 }

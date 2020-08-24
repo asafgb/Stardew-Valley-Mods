@@ -41,7 +41,10 @@ namespace Menu.Widgets
 
         public override void Draw(SpriteBatch batch)
         {
-            batch.DrawString(this.Font, this.Text, new Vector2((float)base.GlobalPosition.X, (float)base.GlobalPosition.Y), this.Color);
+            if (IsHover)
+                batch.DrawString(this.Font, this.Text, new Vector2((float)base.GlobalPosition.X, (float)base.GlobalPosition.Y), Color.Red);
+            else
+                batch.DrawString(this.Font, this.Text, new Vector2((float)base.GlobalPosition.X, (float)base.GlobalPosition.Y), this.Color);
         }
 
         private void RecalculateDimensions()

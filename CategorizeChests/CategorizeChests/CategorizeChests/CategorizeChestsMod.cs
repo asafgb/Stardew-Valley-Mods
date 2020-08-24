@@ -98,7 +98,6 @@ namespace StardewValleyMods.CategorizeChests
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
                 ChestOverlay child = new ChestOverlay(itemGrabMenu, ChestMenu.Instance.chest, this.Config, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, ChestMenu.Instance.WidgetHost.TooltipManager);
-                //ChestMenu.Instance.WidgetHost.RootWidget.AddChild<ChestOverlay>(child);
             }
         }
 
