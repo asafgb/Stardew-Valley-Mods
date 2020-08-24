@@ -9,6 +9,8 @@ namespace Menu.Widgets
 {
     public class Background : Widget
     {
+        public readonly NineSlice Graphic;
+
         public Background(NineSlice nineSlice)
         {
             this.Graphic = nineSlice;
@@ -26,6 +28,5 @@ namespace Menu.Widgets
             this.Graphic.Draw(batch, new Rectangle(base.GlobalPosition.X, base.GlobalPosition.Y, base.Width, base.Height));
         }
 
-        public readonly NineSlice Graphic;
     }
 }

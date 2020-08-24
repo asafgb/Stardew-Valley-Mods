@@ -18,11 +18,12 @@ namespace Menu.Widgets
         private int MaxWidgetDispay { get; set; } = 3;
         private int CurrentPrintIndex { get; set; } = 0;
         private ItemGrabMenu menu = null;
-        private TextButton DownArrow =null;
+        private PngButton DownArrow =null;
 
         public LeftMenu()
         {
-            DownArrow = new TextButton("down", Sprites.LeftProtrudingTab);
+            //DownArrow = new TextButton("down", Sprites.LeftProtrudingTab);
+            DownArrow = new PngButton(Sprites.LeftProtrudingTab);
             DownArrow.OnPress += DownArrow_OnPress;
         }
 
@@ -47,6 +48,7 @@ namespace Menu.Widgets
             }
             else
             {
+                PositionButtons(this.menu, MaxWidgetDispay);
                 Widget lastChild = this.Children[CurrentPrintIndex % this.Children.Count];
                 int Counter =  MaxWidgetDispay;
                 for (int i = CurrentPrintIndex; Counter > 0; i++)
@@ -88,13 +90,17 @@ namespace Menu.Widgets
         //    return MaxWidth;
         //}
 
-        public void PositionButtons(ItemGrabMenu ItemGrMenu)
+        public void PositionButtons(ItemGrabMenu ItemGrMenu,int WidgetDispay = 3)
         {
             this.menu = ItemGrMenu;
 
+            /// if there less children then we wanna to print
+            WidgetDispay = Math.Min(WidgetDispay, this.Children.Count);
             Widget lastchild = null;
-            foreach (Widget child in this.Children)
+
+            for (int i = CurrentPrintIndex; WidgetDispay > 0; i++)
             {
+                Widget child = this.Children[i % this.Children.Count];
                 if (child.ShouldMove)
                 {
                     if (lastchild == null)
@@ -106,6 +112,7 @@ namespace Menu.Widgets
                         child.Position = new Point(lastchild.Position.X + lastchild.Width - child.Width, lastchild.Position.Y + lastchild.Height);
                     }
                     lastchild = child;
+                    WidgetDispay--;
                 }
             }
             //this.StashButton.Width = (this.OpenButton.Width = Math.Max(this.StashButton.Width, this.OpenButton.Width));

@@ -1,4 +1,5 @@
 ﻿using System;
+using Menu.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,29 +11,28 @@ namespace Menu.Interfaces
 {
     public abstract class InterfaceHost : IDisposable
     {
-        IModHelper helper;
+        //IModHelper helper;
         public virtual void Dispose()
         {
-            helper.Events.Display.RenderedActiveMenu -= Display_RenderedActiveMenu;
-            helper.Events.GameLoop.UpdateTicked -= GameLoop_UpdateTicked;
 
-            helper.Events.Input.ButtonPressed -= Input_ButtonPressed;
-            helper.Events.Input.CursorMoved -= Input_CursorMoved;
-            helper.Events.Input.MouseWheelScrolled -= Input_MouseWheelScrolled;
+            Stat.helper.Events.Display.RenderedActiveMenu -= Display_RenderedActiveMenu;
+            Stat.helper.Events.GameLoop.UpdateTicked -= GameLoop_UpdateTicked;
+            Stat.helper.Events.Input.ButtonPressed -= Input_ButtonPressed;
+            Stat.helper.Events.Input.CursorMoved -= Input_CursorMoved;
+            Stat.helper.Events.Input.MouseWheelScrolled -= Input_MouseWheelScrolled;
         }
 
-        protected InterfaceHost(IModHelper helper, Func<bool> keepAlive = null)
+        protected InterfaceHost(Func<bool> keepAlive = null) // IModHelper helper, 
         {
-            this.helper = helper;
+            //this.helper = helper;
             this.KeepAliveCheck = keepAlive;
             this.LastViewport = new xTile.Dimensions.Rectangle(Game1.viewport.X, Game1.viewport.Y, Game1.viewport.Width, Game1.viewport.Height);
 
-            helper.Events.Display.RenderedActiveMenu += Display_RenderedActiveMenu;
-            helper.Events.GameLoop.UpdateTicked += GameLoop_UpdateTicked;
-
-            helper.Events.Input.ButtonPressed += Input_ButtonPressed;
-            helper.Events.Input.CursorMoved += Input_CursorMoved;
-            helper.Events.Input.MouseWheelScrolled += Input_MouseWheelScrolled;
+            Stat.helper.Events.Display.RenderedActiveMenu += Display_RenderedActiveMenu;
+            Stat.helper.Events.GameLoop.UpdateTicked += GameLoop_UpdateTicked;
+            Stat.helper.Events.Input.ButtonPressed += Input_ButtonPressed;
+            Stat.helper.Events.Input.CursorMoved += Input_CursorMoved;
+            Stat.helper.Events.Input.MouseWheelScrolled += Input_MouseWheelScrolled;
 
         }
 

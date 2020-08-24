@@ -14,7 +14,7 @@ namespace Menu
 {
     public class ChestMenu /*: Mod*/
     {
-        private IModHelper Helper;
+        //private IModHelper Helper;
         private Mutex mut = new Mutex();
         private Config Config;
 
@@ -42,18 +42,26 @@ namespace Menu
 
         public void InitInstance(IModHelper helper)
         {
-            if(this.Helper == null)
+
+            if(Stat.helper == null)
             {
-                this.Helper = helper;
-                
-                this.Helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+                Stat.helper = helper;
+
+                Stat.helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+                Stat.helper.Events.GameLoop.GameLaunched += GameLoop_GameLaunched;
             }
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
         {
-            this.Helper.Events.GameLoop.SaveLoaded -= GameLoop_SaveLoaded;
-            this.Helper.Events.Display.MenuChanged += Display_MenuChanged;
+            Stat.helper.Events.GameLoop.SaveLoaded -= GameLoop_SaveLoaded;
+            
+            Stat.helper.Events.Display.MenuChanged += Display_MenuChanged;
+        }
+
+        private void GameLoop_GameLaunched(object sender, StardewModdingAPI.Events.GameLaunchedEventArgs e)
+        {
+            Stat.helper.Content.AssetEditors.Add(new MiscEditor(Stat.helper));
         }
 
         private void Display_MenuChanged(object sender, StardewModdingAPI.Events.MenuChangedEventArgs e)
@@ -74,7 +82,7 @@ namespace Menu
                 if (chest != null)
                 {
                     this.chest = chest;
-                    this.WidgetHost = new WidgetHost(this.Helper);
+                    this.WidgetHost = new WidgetHost(Stat.helper);
                 }
             }
 

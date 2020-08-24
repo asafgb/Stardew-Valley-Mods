@@ -13,7 +13,7 @@ namespace Menu.Interfaces
         public readonly ITooltipManager TooltipManager;
         public readonly Widget RootWidget;
 
-        public WidgetHost(IModHelper helper) : base(helper, null)
+        public WidgetHost(IModHelper helper) : base( null)
         {
             this.RootWidget = new LeftMenu
             {
