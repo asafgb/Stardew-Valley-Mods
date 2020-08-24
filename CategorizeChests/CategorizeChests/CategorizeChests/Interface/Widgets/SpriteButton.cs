@@ -1,4 +1,6 @@
 ﻿using System;
+using Menu.Interfaces;
+using Menu.Widgets;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets

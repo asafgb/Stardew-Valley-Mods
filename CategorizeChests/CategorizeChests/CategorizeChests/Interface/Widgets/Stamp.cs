@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 using Menu.Widgets;
+using Menu.Interfaces;
+
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
 		internal class Stamp : Widget

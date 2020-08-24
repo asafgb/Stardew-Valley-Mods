@@ -68,6 +68,11 @@ namespace LockChest.Interface.Widgets
 
             ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test1", Sprites.LeftProtrudingTab), indexToPut);
             ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test2", Sprites.LeftProtrudingTab), indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test3", Sprites.LeftProtrudingTab), indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test4", Sprites.LeftProtrudingTab), indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test5", Sprites.LeftProtrudingTab), indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test6", Sprites.LeftProtrudingTab), indexToPut);
+            ChestMenu.Instance.WidgetHost.RootWidget.AddChild<TextButton>(new TextButton("test6", Sprites.LeftProtrudingTab), indexToPut);
 
             ChestMenu.Instance.WidgetHost.RootWidget.PositionButtons(this.ItemGrabMenu);
             // base.AddChild<TextButton>(this.LockButton);

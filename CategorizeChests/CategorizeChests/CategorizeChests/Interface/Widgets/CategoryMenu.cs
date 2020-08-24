@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using StardewValley;
 using StardewValleyMods.CategorizeChests.Framework;
 using Menu.Widgets;
 using Menu.Interfaces;
+using StardewValley;
+using Background = Menu.Widgets.Background;
 
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
