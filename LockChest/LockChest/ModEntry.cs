@@ -1,10 +1,10 @@
 ﻿using LockChest.Common;
-using LockChest.Frameworks;
 using LockChest.Interface;
 using LockChest.Interface.Widgets;
 using Menu;
 using Menu.Common;
 using StardewModdingAPI;
+using StardewValley;
 using StardewValley.Menus;
 using StardewValley.Objects;
 using System;
@@ -38,25 +38,31 @@ namespace LockChest
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
         {
-            ////this.ItemDataManager = new ItemDataManager(base.Monitor);
-            //this.ChestDataManager = new ChestDataManager(/*this.ItemDataManager,*/ base.Monitor);
-            //this.ChestFiller = new ChestFiller(this.ChestDataManager, base.Monitor);
-            //this.ChestFinder = new ChestFinder();
-            //this.SaveManager = new SaveManager(base.ModManifest.Version, this.ChestDataManager, this.ChestFinder, this.ItemDataManager);
-            //this.SavePath = Path.Combine(this.SaveDirectory, Constants.SaveFolderName + ".json");
-            //try
-            //{
-            //    if (File.Exists(this.SavePath))
-            //    {
-            //        this.SaveManager.Load(this.SavePath);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    base.Monitor.Log(string.Format("Error loading chest data from {0}", this.SavePath), LogLevel.Error);
-            //    base.Monitor.Log(ex.ToString(), LogLevel.Debug);
-            //}
+            GameSave gameSave = new GameSave();
+
+            if (Game1.IsMultiplayer)
+            {
+
+            }
         }
+        ////this.ItemDataManager = new ItemDataManager(base.Monitor);
+        //this.ChestDataManager = new ChestDataManager(/*this.ItemDataManager,*/ base.Monitor);
+        //this.ChestFiller = new ChestFiller(this.ChestDataManager, base.Monitor);
+        //this.ChestFinder = new ChestFinder();
+        //this.SaveManager = new SaveManager(base.ModManifest.Version, this.ChestDataManager, this.ChestFinder, this.ItemDataManager);
+        //this.SavePath = Path.Combine(this.SaveDirectory, Constants.SaveFolderName + ".json");
+        //try
+        //{
+        //    if (File.Exists(this.SavePath))
+        //    {
+        //        this.SaveManager.Load(this.SavePath);
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    base.Monitor.Log(string.Format("Error loading chest data from {0}", this.SavePath), LogLevel.Error);
+        //    base.Monitor.Log(ex.ToString(), LogLevel.Debug);
+        //}
 
         private void Display_MenuChanged(object sender, StardewModdingAPI.Events.MenuChangedEventArgs e)
         {
