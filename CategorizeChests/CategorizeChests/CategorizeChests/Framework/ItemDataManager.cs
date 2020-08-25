@@ -80,7 +80,7 @@ namespace StardewValleyMods.CategorizeChests.Framework
             yield return new DiscoveredItem(ItemType.Tool, 1, ToolFactory.getToolFromDescription(1, 0));
             yield return new DiscoveredItem(ItemType.Tool, 3, ToolFactory.getToolFromDescription(3, 0));
             yield return new DiscoveredItem(ItemType.Tool, 4, ToolFactory.getToolFromDescription(4, 0));
-            yield return new DiscoveredItem(ItemType.Tool, 2, ToolFactory.getToolFromDescription(2, 0));
+            yield return new DiscoveredItem(ItemType.Tool, 2, ToolFactory.getToolFromDescription(2, 2));
             yield return new DiscoveredItem(ItemType.Tool, this.CustomIDOffset, new MilkPail());
             yield return new DiscoveredItem(ItemType.Tool, this.CustomIDOffset + 1, new Shears());
             yield return new DiscoveredItem(ItemType.Tool, this.CustomIDOffset + 2, new Pan());
@@ -117,7 +117,6 @@ namespace StardewValleyMods.CategorizeChests.Framework
                 }
             }
             enumerator = default(Dictionary<int, string>.KeyCollection.Enumerator);
-            yield break;
             yield break;
         }
 

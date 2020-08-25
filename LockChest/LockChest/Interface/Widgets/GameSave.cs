@@ -28,7 +28,7 @@ namespace LockChest.Interface.Widgets
 
         private void SaveGame(string gameName)
         {
-            string json = JsonConvert.SerializeObject(this,Formatting.Indented);
+            //string json = JsonConvert.SerializeObject(this,Formatting.Indented);
             File.WriteAllText(gameName,json);
         }
 

@@ -20,10 +20,6 @@ namespace LockChest.Interface.Widgets
         private readonly InventoryMenu.highlightThisItem DefaultChestHighlighter;
         private readonly InventoryMenu.highlightThisItem DefaultInventoryHighlighter;
         private readonly ModConfig Config;
-        //private readonly IChestDataManager ChestDataManager;
-        //private readonly IChestFiller ChestFiller;
-        //private readonly IItemDataManager ItemDataManager;
-        //private readonly ITooltipManager TooltipManager;
         private readonly Chest Chest;
         private TextButton LockButton;
         private bool IsLocked;
@@ -34,10 +30,6 @@ namespace LockChest.Interface.Widgets
         public ChestOverlay(ItemGrabMenu menu, Chest chest, ModConfig config)// IChestDataManager chestDataManager, IChestFiller chestFiller, IItemDataManager itemDataManager, ITooltipManager tooltipManager
         {
             this.Config = config;
-            //this.ItemDataManager = itemDataManager;
-            //this.ChestDataManager = chestDataManager;
-            //this.ChestFiller = chestFiller;
-            //this.TooltipManager = tooltipManager;
             this.Chest = chest;
             this.ItemGrabMenu = menu;
             this.InventoryMenu = menu.ItemsToGrabMenu;
