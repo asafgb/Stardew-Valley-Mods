@@ -8,8 +8,8 @@
     <ProjectGuid>{8B0DFD0E-E9B2-46D6-BC2D-FBB0C4BA00E2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LockChest</RootNamespace>
-    <AssemblyName>LockChest</AssemblyName>
+    <RootNamespace>MyPrivateChest</RootNamespace>
+    <AssemblyName>MyPrivateChest</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,8 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\UpdateNotifier.cs" />
-    <Compile Include="Frameworks\AllLockChests.cs" />
+    <Compile Include="Frameworks\AllPrivateChests.cs" />
+    <Compile Include="Frameworks\PrivateMenu.cs" />
     <Compile Include="Frameworks\SDate.cs" />
+    <Compile Include="Frameworks\SpriteButton.cs" />
     <Compile Include="Interface\GameTimeHandler.cs" />
     <Compile Include="Interface\ItemKeeper.cs" />
     <Compile Include="Interface\SeasonEnum.cs" />

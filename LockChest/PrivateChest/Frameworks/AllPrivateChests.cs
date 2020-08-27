@@ -5,6 +5,7 @@ using LockChest.Interface.Widgets;
 using Newtonsoft.Json;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.Menus;
 using StardewValley.Objects;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 namespace LockChest.Frameworks
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class AllLockChests
+    public class AllPrivateChests
     {
         [JsonProperty]
         private List<ChestIdentity> lstChest;
@@ -36,13 +37,17 @@ namespace LockChest.Frameworks
         private readonly string TempSave;
         private readonly string AllDay;
 
-        public AllLockChests(IModHelper helper)
+        public AllPrivateChests(IModHelper helper,int AmountOfChest)
         {
             // if run temp
             if (helper != null)
             {
                 this.helper = helper;
                 lstChest = new List<ChestIdentity>();
+                for (int i = 0; i < AmountOfChest; i++)
+                {
+                    lstChest.Add(new ChestIdentity());
+                }
                 CharacterName = Game1.player.Name;
                 TempSave = Path.Combine(helper.DirectoryPath, $"{CharacterName}_Temp.json");
                 AllDay = Path.Combine(helper.DirectoryPath, $"{CharacterName}_EndDay.json");
@@ -51,7 +56,6 @@ namespace LockChest.Frameworks
 
             }
         }
-
 
 
         public List<ChestIdentity> GetChests { get { return this.lstChest; } }
@@ -69,7 +73,7 @@ namespace LockChest.Frameworks
         {
             bool Isvalid = true;
             string json = File.ReadAllText(TempSave);
-            AllLockChests temp = JsonConvert.DeserializeObject<AllLockChests>(json);
+            AllPrivateChests temp = JsonConvert.DeserializeObject<AllPrivateChests>(json);
 
             // if the player crush and not the host 
             // so time In game will be later from the temp file
@@ -139,10 +143,12 @@ namespace LockChest.Frameworks
         {
             //string json = JsonConvert.SerializeObject(this, Formatting.Indented);
             string json = File.ReadAllText(gameName);
-            AllLockChests temp = JsonConvert.DeserializeObject<AllLockChests>(json);
+            AllPrivateChests temp = JsonConvert.DeserializeObject<AllPrivateChests>(json);
             this.lstChest = temp.lstChest;
             this.playerInventory = temp.playerInventory;
         }
+
+        
 
     }
 }

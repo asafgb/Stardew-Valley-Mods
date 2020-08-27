@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockChest", "LockChest\LockChest.csproj", "{8B0DFD0E-E9B2-46D6-BC2D-FBB0C4BA00E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPrivateChest", "MyPrivateChest.csproj", "{8B0DFD0E-E9B2-46D6-BC2D-FBB0C4BA00E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {080D9C8A-8BAD-424B-A264-56DC4460EE14}
+		SolutionGuid = {FA1C925F-2302-46E5-BF36-14B8BFB7D532}
 	EndGlobalSection
 EndGlobal

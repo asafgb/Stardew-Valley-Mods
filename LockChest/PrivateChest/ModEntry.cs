@@ -19,9 +19,7 @@ namespace LockChest
     public class ModEntry : Mod
     {
         private ModConfig Config;
-        private string SaveDirectory;
-        private string SavePath;
-        AllLockChests gameSave;
+        AllPrivateChests gameSave;
         IModHelper helper;
         public override void Entry(IModHelper helper)
         {
@@ -48,15 +46,15 @@ namespace LockChest
 
         private void Player_InventoryChanged(object sender, StardewModdingAPI.Events.InventoryChangedEventArgs e)
         {
-            //throw new NotImplementedException();
             gameSave.SaveTemp();
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
         {
+            // TODO: change at the end
             if (!Game1.IsMultiplayer)
             {
-                gameSave = new AllLockChests(this.helper);
+                gameSave = new AllPrivateChests(this.helper,this.Config.AmountOfChest);
 
             }
         }
@@ -79,7 +77,7 @@ namespace LockChest
             if((itemGrabMenu = (e.NewMenu as ItemGrabMenu)) != null) // && ChestMenu.Instance.currentMenu == e.OldMenu
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
-                ChestOverlay child = new ChestOverlay(itemGrabMenu, ChestMenu.Instance.chest,this.gameSave, this.Config);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
+                ChestOverlay child = new ChestOverlay(itemGrabMenu,this.gameSave, this.Config,this.helper);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
             }
         }
 

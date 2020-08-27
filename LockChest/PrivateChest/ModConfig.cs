@@ -6,6 +6,8 @@ namespace LockChest
     public class ModConfig
     {
         public bool CheckForUpdates { get; set; } = true;
-        public string GithubUrlForProjectManifest { get; set; } 
+        public string GithubUrlForProjectManifest { get; set; }
+
+        public int AmountOfChest { get; set; } = 3;
     }
 }
