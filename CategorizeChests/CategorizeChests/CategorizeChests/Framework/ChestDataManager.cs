@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using StardewModdingAPI;
 using StardewValley.Objects;
+using ItemManager.interfaces;
 
 namespace StardewValleyMods.CategorizeChests.Framework
 {

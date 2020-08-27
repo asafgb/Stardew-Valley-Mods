@@ -10,6 +10,7 @@ using StardewValleyMods.CategorizeChests.Framework;
 using Menu.Widgets;
 using Menu.Interfaces;
 using Menu;
+using ItemManager.interfaces;
 
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {

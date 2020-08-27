@@ -1,0 +1,10 @@
+﻿{
+  "Name": "ItemManager",
+  "Author": "Asafgb",
+  "Version": "1.0.0",
+  "Description": "ItemManager, getting all Inventory Items manager",
+  "UniqueID": "Asafgb.ItemManager",
+  "EntryDll": "ItemManager.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}

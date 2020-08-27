@@ -1,9 +1,13 @@
-﻿using System;
-using StardewValley;
+﻿using StardewValley;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace StardewValleyMods.CategorizeChests.Framework
+namespace ItemManager.interfaces
 {
-    internal class DiscoveredItem
+    public class DiscoveredItem
     {
         public DiscoveredItem(ItemType type, int index, Item item)
         {

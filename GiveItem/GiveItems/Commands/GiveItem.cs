@@ -77,7 +77,7 @@ namespace Commands.Commands
                 if(itemIndex != -1)
                 {
                     item = (Item)new StardewValley.Object(itemIndex, itemStack, false, itemPrice, itemQulity);
-                    if(farm.addItemToInventoryBool(item))
+                    if (farm.addItemToInventoryBool(item))
                     {
                         Game1.chatBox.addMessage($"item {item.DisplayName} has been added",Color.Aqua);
                         //Game1.chatBox.receiveChatMessage()

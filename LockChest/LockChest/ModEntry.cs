@@ -1,4 +1,5 @@
 ﻿using LockChest.Common;
+using LockChest.Frameworks;
 using LockChest.Interface;
 using LockChest.Interface.Widgets;
 using Menu;
@@ -20,12 +21,16 @@ namespace LockChest
         private ModConfig Config;
         private string SaveDirectory;
         private string SavePath;
-
-
+        AllLockChests gameSave;
+        IModHelper helper;
         public override void Entry(IModHelper helper)
         {
+            this.helper = helper;
             helper.Events.Display.MenuChanged += Display_MenuChanged;
             helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+            Helper.Events.GameLoop.DayEnding += GameLoop_DayEnding; 
+            Helper.Events.Player.InventoryChanged += Player_InventoryChanged;
+
             ChestMenu.Instance.InitInstance(helper);
 
             this.Config = this.Helper.ReadConfig<ModConfig>();
@@ -36,33 +41,26 @@ namespace LockChest
             }
         }
 
+        private void GameLoop_DayEnding(object sender, StardewModdingAPI.Events.DayEndingEventArgs e)
+        {
+            gameSave.SaveEndDay();
+        }
+
+        private void Player_InventoryChanged(object sender, StardewModdingAPI.Events.InventoryChangedEventArgs e)
+        {
+            //throw new NotImplementedException();
+            gameSave.SaveTemp();
+        }
+
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
         {
-            GameSave gameSave = new GameSave();
-
-            if (Game1.IsMultiplayer)
+            if (!Game1.IsMultiplayer)
             {
+                gameSave = new AllLockChests(this.helper);
 
             }
         }
-        ////this.ItemDataManager = new ItemDataManager(base.Monitor);
-        //this.ChestDataManager = new ChestDataManager(/*this.ItemDataManager,*/ base.Monitor);
-        //this.ChestFiller = new ChestFiller(this.ChestDataManager, base.Monitor);
-        //this.ChestFinder = new ChestFinder();
-        //this.SaveManager = new SaveManager(base.ModManifest.Version, this.ChestDataManager, this.ChestFinder, this.ItemDataManager);
-        //this.SavePath = Path.Combine(this.SaveDirectory, Constants.SaveFolderName + ".json");
-        //try
-        //{
-        //    if (File.Exists(this.SavePath))
-        //    {
-        //        this.SaveManager.Load(this.SavePath);
-        //    }
-        //}
-        //catch (Exception ex)
-        //{
-        //    base.Monitor.Log(string.Format("Error loading chest data from {0}", this.SavePath), LogLevel.Error);
-        //    base.Monitor.Log(ex.ToString(), LogLevel.Debug);
-        //}
+      
 
         private void Display_MenuChanged(object sender, StardewModdingAPI.Events.MenuChangedEventArgs e)
         {
@@ -81,8 +79,7 @@ namespace LockChest
             if((itemGrabMenu = (e.NewMenu as ItemGrabMenu)) != null) // && ChestMenu.Instance.currentMenu == e.OldMenu
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
-                ChestOverlay child = new ChestOverlay(itemGrabMenu, ChestMenu.Instance.chest, this.Config);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
-                //ChestMenu.Instance.WidgetHost.RootWidget.AddChild(child);
+                ChestOverlay child = new ChestOverlay(itemGrabMenu, ChestMenu.Instance.chest,this.gameSave, this.Config);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
             }
         }
 

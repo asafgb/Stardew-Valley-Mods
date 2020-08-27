@@ -10,6 +10,8 @@ using StardewValleyMods.CategorizeChests.Framework.Persistence;
 using StardewValleyMods.CategorizeChests.Interface;
 using StardewValleyMods.CategorizeChests.Interface.Widgets;
 using StardewValleyMods.Common;
+using ItemManager.interfaces;
+using ItemManager;
 
 namespace StardewValleyMods.CategorizeChests
 {
@@ -47,7 +49,8 @@ namespace StardewValleyMods.CategorizeChests
 
         private void GameLoop_SaveLoaded(object sender, SaveLoadedEventArgs e)
         {
-            this.ItemDataManager = new ItemDataManager(base.Monitor);
+
+            this.ItemDataManager = ItemManager.ItemDataManager.Instance;
             this.ChestDataManager = new ChestDataManager(this.ItemDataManager, base.Monitor);
             this.ChestFiller = new ChestFiller(this.ChestDataManager, base.Monitor);
             this.ChestFinder = new ChestFinder();

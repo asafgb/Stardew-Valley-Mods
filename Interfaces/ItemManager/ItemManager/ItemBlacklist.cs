@@ -1,9 +1,13 @@
-﻿using System;
+﻿using ItemManager.interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace StardewValleyMods.CategorizeChests.Framework
+namespace ItemManager
 {
-    internal static class ItemBlacklist
+    public static class ItemBlacklist
     {
         public static bool Includes(ItemKey itemKey)
         {

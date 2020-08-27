@@ -29,6 +29,12 @@ namespace Menu
         {
         }
 
+        /// <summary>
+        /// This must be True after clear the menu once,
+        /// Cause if not, other mods at the chest menu wont be set 
+        /// more specific: be clean
+        /// </summary>
+        /// <param name="request"></param>
         public void setRemoveChildrenFlag(bool request)
         {
             this.AlreadyRemoveChildrenOnce = request;

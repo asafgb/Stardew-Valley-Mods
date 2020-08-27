@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using StardewValley;
+using ItemManager.interfaces;
 using StardewValley.Objects;
 
 namespace StardewValleyMods.CategorizeChests.Framework

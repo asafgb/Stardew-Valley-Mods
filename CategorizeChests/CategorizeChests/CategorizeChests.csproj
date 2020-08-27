@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ItemManager">
+      <HintPath>..\..\Interfaces\ItemManager\ItemManager\bin\Debug\ItemManager.dll</HintPath>
+    </Reference>
     <Reference Include="Menu">
       <HintPath>..\..\Menu\Menu\bin\Debug\Menu.dll</HintPath>
     </Reference>
@@ -58,16 +61,10 @@
     <Compile Include="CategorizeChests\Framework\ChestDataManager.cs" />
     <Compile Include="CategorizeChests\Framework\ChestFiller.cs" />
     <Compile Include="CategorizeChests\Framework\ChestFinder.cs" />
-    <Compile Include="CategorizeChests\Framework\DiscoveredItem.cs" />
     <Compile Include="CategorizeChests\Framework\IChestDataManager.cs" />
     <Compile Include="CategorizeChests\Framework\IChestFiller.cs" />
     <Compile Include="CategorizeChests\Framework\IChestFinder.cs" />
-    <Compile Include="CategorizeChests\Framework\IItemDataManager.cs" />
-    <Compile Include="CategorizeChests\Framework\ItemBlacklist.cs" />
-    <Compile Include="CategorizeChests\Framework\ItemDataManager.cs" />
-    <Compile Include="CategorizeChests\Framework\ItemKey.cs" />
     <Compile Include="CategorizeChests\Framework\ItemNotImplementedException.cs" />
-    <Compile Include="CategorizeChests\Framework\ItemType.cs" />
     <Compile Include="CategorizeChests\Framework\Persistence\ChestAddress.cs" />
     <Compile Include="CategorizeChests\Framework\Persistence\ChestEntry.cs" />
     <Compile Include="CategorizeChests\Framework\Persistence\ChestLocationType.cs" />

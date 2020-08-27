@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LockChest.Interface
+namespace ItemManager.interfaces
 {
-
     public enum ItemType
     {
         BigCraftable,
@@ -20,6 +19,7 @@ namespace LockChest.Interface
         Tool,
         Wallpaper,
         Weapon,
+        Cloth,
         None
     }
     public enum TypeEnum

@@ -3,6 +3,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using StardewModdingAPI;
 using StardewValleyMods.CategorizeChests.Framework.Persistence.Legacy;
+using ItemManager.interfaces;
 
 namespace StardewValleyMods.CategorizeChests.Framework.Persistence
 {

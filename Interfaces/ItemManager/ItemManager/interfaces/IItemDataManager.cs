@@ -1,10 +1,13 @@
-﻿using System;
+﻿using StardewValley;
+using System;
 using System.Collections.Generic;
-using StardewValley;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace StardewValleyMods.CategorizeChests.Framework
+namespace ItemManager.interfaces
 {
-    internal interface IItemDataManager
+    public interface IItemDataManager
     {
         IDictionary<string, IEnumerable<ItemKey>> Categories { get; }
 

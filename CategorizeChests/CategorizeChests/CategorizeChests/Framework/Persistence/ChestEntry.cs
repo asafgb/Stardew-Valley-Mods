@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItemManager.interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace StardewValleyMods.CategorizeChests.Framework.Persistence

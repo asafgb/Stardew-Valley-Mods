@@ -8,6 +8,8 @@ using Menu.Widgets;
 using Menu.Interfaces;
 using StardewValley;
 using Background = Menu.Widgets.Background;
+using ItemManager.interfaces;
+
 
 namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 {
