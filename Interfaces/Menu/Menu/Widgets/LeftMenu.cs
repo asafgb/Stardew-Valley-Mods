@@ -19,7 +19,7 @@ namespace Menu.Widgets
         private int MaxWidgetDispay { get; set; } = 3;
         private int CurrentPrintIndex { get; set; } = 0;
         private ItemGrabMenu menu = null;
-        private PngButton DownArrow =null;
+        private PngButton DownArrow = null;
 
         public LeftMenu()
         {
@@ -40,6 +40,11 @@ namespace Menu.Widgets
 
         protected override void DrawChildren(SpriteBatch batch)
         {
+            foreach (Widget widget in this._UnMoveChildren)
+            {
+                widget.Draw(batch);
+            }
+
             PositionButtons(this.menu, MaxWidgetDispay);
             if (MaxWidgetDispay < 0 || this.Children.Count <= MaxWidgetDispay)
             {
@@ -48,7 +53,7 @@ namespace Menu.Widgets
                     widget.Draw(batch);
                 }
             }
-            else if (this.Children.Count >0)
+            else if (this.Children.Count > 0)
             {
                 Widget lastChild = this.Children[CurrentPrintIndex % this.Children.Count];
                 int i = CurrentPrintIndex;
@@ -56,11 +61,7 @@ namespace Menu.Widgets
 
                 do
                 {
-                    if (!this.Children[i % this.Children.Count].ShouldMove)
-                    {
-                        this.Children[i % this.Children.Count].Draw(batch);
-                    }
-                    else if (CounterToDisplay > 0)
+                    if (CounterToDisplay > 0)
                     {
                         CounterToDisplay--;
                         lastChild = this.Children[i % this.Children.Count];
@@ -73,29 +74,16 @@ namespace Menu.Widgets
                 PlaceTheButton(DownArrow, lastChild);
                 DownArrow.Draw(batch);
 
-            
+
             }
         }
-
 
         public void PlaceTheButton(Widget buttonwidget, Widget lastwidget)
         {
             buttonwidget.Position = new Point(lastwidget.Position.X + lastwidget.Width - buttonwidget.Width, lastwidget.Position.Y + lastwidget.Height);
         }
 
-        // this will help for width one size
-        //private int maxWidthOfChildren()
-        //{
-        //    int MaxWidth = 0;
-        //    foreach (Widget child in _Children)
-        //    {
-        //        if(child.ShouldMove)
-        //        MaxWidth = Math.Max(child.Width, MaxWidth);
-        //    }
-        //    return MaxWidth;
-        //}
-
-        public void PositionButtons(ItemGrabMenu ItemGrMenu,int WidgetDispay = 3)
+        public void PositionButtons(ItemGrabMenu ItemGrMenu, int WidgetDispay = 3)
         {
             this.menu = ItemGrMenu;
 
@@ -103,26 +91,20 @@ namespace Menu.Widgets
             WidgetDispay = Math.Min(WidgetDispay, this.Children.Count);
             Widget lastchild = null;
 
-            for (int i = CurrentPrintIndex; WidgetDispay > 0 && i < CurrentPrintIndex+ this.Children.Count; i++)
+            for (int i = CurrentPrintIndex; WidgetDispay > 0 && i < CurrentPrintIndex + this.Children.Count; i++)
             {
                 Widget child = this.Children[i % this.Children.Count];
-                if (child.ShouldMove)
+                if (lastchild == null)
                 {
-                    if (lastchild == null)
-                    {
-                        child.Position = new Point(ItemGrMenu.xPositionOnScreen + ItemGrMenu.width / 2 - child.Width - 112 * Game1.pixelZoom, ItemGrMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-                    }
-                    else
-                    {
-                        child.Position = new Point(lastchild.Position.X + lastchild.Width - child.Width, lastchild.Position.Y + lastchild.Height);
-                    }
-                    lastchild = child;
-                    WidgetDispay--;
+                    child.Position = new Point(ItemGrMenu.xPositionOnScreen + ItemGrMenu.width / 2 - child.Width - 112 * Game1.pixelZoom, ItemGrMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
                 }
+                else
+                {
+                    child.Position = new Point(lastchild.Position.X + lastchild.Width - child.Width, lastchild.Position.Y + lastchild.Height);
+                }
+                lastchild = child;
+                WidgetDispay--;
             }
-            //this.StashButton.Width = (this.OpenButton.Width = Math.Max(this.StashButton.Width, this.OpenButton.Width));
-            //this.OpenButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.OpenButton.Width - 112 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen + 22 * Game1.pixelZoom);
-            //this.StashButton.Position = new Point(this.OpenButton.Position.X + this.OpenButton.Width - this.StashButton.Width, this.OpenButton.Position.Y + this.OpenButton.Height);
         }
 
 
@@ -143,12 +125,12 @@ namespace Menu.Widgets
         public override bool ReceiveLeftClick(Point point)
         {
             Point point2 = new Point(point.X - DownArrow.Position.X, point.Y - DownArrow.Position.Y);
-           
-            return DownArrow.ReceiveLeftClick(point2) || base.ReceiveLeftClick(point) ;
+
+            return DownArrow.ReceiveLeftClick(point2) || base.ReceiveLeftClick(point);
             //return base.ReceiveLeftClick(new Point(x, y));
         }
 
-     
+
 
         public override bool ReceiveScrollWheelAction(int amount)
         {
@@ -156,9 +138,7 @@ namespace Menu.Widgets
             //return this.RootWidget.ReceiveScrollWheelAction(amount);
         }
 
-
-
-        public List<Widget> Children
+        public List<Widget> UnMoveChildren
         {
             get
             {
@@ -166,14 +146,12 @@ namespace Menu.Widgets
             }
         }
 
-        public int getChildIndex(Widget child)
+        public int GetChildIndex(Widget child)
         {
             return this._UnMoveChildren.IndexOf(child);
         }
 
-
-
-        public T AddChild<T>(T child, int InsertIndex = -1) where T : Widget
+        public T AddUnMoveChild<T>(T child, int InsertIndex = -1) where T : Widget
         {
             child.Parent = this;
             if (InsertIndex >= 0)
@@ -185,19 +163,20 @@ namespace Menu.Widgets
         }
 
 
-        public void RemoveChild(Widget child)
+        public void RemoveUnMoveChild(Widget child)
         {
             this._UnMoveChildren.Remove(child);
             child.Parent = null;
             this.OnContentsChanged();
         }
 
-        public void RemoveChildren()
+        public void RemoveUnMoveChildren()
         {
             this.RemoveChildren((Widget c) => true);
         }
 
-        public void RemoveChildren(Predicate<Widget> shouldRemove)
+
+        public void RemoveUnMoveChildren(Predicate<Widget> shouldRemove)
         {
             foreach (Widget widget in this.Children.Where<Widget>((Func<Widget, bool>)(c => shouldRemove(c))))
                 widget.Parent = (Widget)null;
