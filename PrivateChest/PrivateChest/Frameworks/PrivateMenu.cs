@@ -1,4 +1,6 @@
-﻿using LockChest.Frameworks;
+﻿using ItemManager;
+using LockChest.Frameworks;
+using LockChest.Interface;
 using Menu.Interfaces;
 using Menu.Widgets;
 using Microsoft.Xna.Framework;
@@ -16,31 +18,31 @@ using Background = Menu.Widgets.Background;
 
 namespace MyPrivateChest.Frameworks
 {
-    internal class PrivateMenu : Widget
+    internal class PrivateMenu : Chest
     {
-        public event Action OnClose;
-        private AllPrivateChests AllPrivateChests;
-        private int ChestIndex;
+        //public event Action OnClose;
         private Chest CurrChest;
-
-        private Widget Body;
-
-        private Widget TopRow;
-
-        private SpriteButton CloseButton;
-
-        private Background Background;
-
-        private Label CategoryLabel;
-
-        private SpriteButton PrevButton;
-
-        private SpriteButton NextButton;
-
+        AllPrivateChests allPrivateChests;
         private readonly IReflectionHelper Reflection;
 
+        //private Widget Body;
 
-        private string SelectedCategory;
+        //private Widget TopRow;
+
+        //private SpriteButton CloseButton;
+
+        //private Background Background;
+
+        //private Label CategoryLabel;
+
+        //private SpriteButton PrevButton;
+
+        //private SpriteButton NextButton;
+
+        //
+
+
+        //private string SelectedCategory;
 
 
         private SpriteFont HeaderFont
@@ -58,23 +60,17 @@ namespace MyPrivateChest.Frameworks
                 return 2 * Game1.pixelZoom;
             }
         }
-
-
-
-        public PrivateMenu(AllPrivateChests allPrivateChests, IReflectionHelper Reflection)
+        public PrivateMenu(IReflectionHelper Reflection)
         {
-            this.AllPrivateChests = allPrivateChests;
             this.Reflection = Reflection;
-            ChestIndex = 0;
-            Game1.exitActiveMenu();
-            Game1.activeClickableMenu = OpenMenu();
-            // this.OpenMenu();
-            //this.BuildWidgets();
-            //this.PositionElements();
         }
-        public IClickableMenu OpenMenu()
+
+
+        public void OpenMenu(AllPrivateChests allPrivateChests, int ChestIndex)
         {
-            CurrChest = this.AllPrivateChests.GetChests[ChestIndex].GetChest;
+            this.allPrivateChests = allPrivateChests;
+            //Game1.exitActiveMenu();
+            CurrChest = allPrivateChests.GetCurrentChest;
             IClickableMenu menu;
             switch (Constants.TargetPlatform)
             {
@@ -111,12 +107,14 @@ namespace MyPrivateChest.Frameworks
                     break;
 
             }
-            return menu;
+            Game1.activeClickableMenu = menu;
+
         }
 
         private void GrabItemFromPlayer(Item item, Farmer player)
         {
             CurrChest.grabItemFromInventory(item, player);
+            
             this.OnChanged();
         }
 
@@ -133,6 +131,10 @@ namespace MyPrivateChest.Frameworks
             {
                 ((ItemGrabMenu)Game1.activeClickableMenu).behaviorOnItemGrab = this.GrabItemFromContainer;
                 this.Reflection.GetField<ItemGrabMenu.behaviorOnItemSelect>(Game1.activeClickableMenu, "behaviorFunction").SetValue(this.GrabItemFromPlayer);
+                List<ItemKeeper> keepers= this.CurrChest.items.Select(itm => new ItemKeeper(ItemDataManager.Instance.GetKey(itm),
+                    itm as Tool != null ? ((Tool)itm).UpgradeLevel : ((StardewValley.Object)itm).Quality,itm.Stack)).ToList();
+                this.allPrivateChests.getCurrentChestId.SetInventory(keepers);
+                //allPrivateChests.SaveTemp();
             }
         }
 
@@ -143,80 +145,77 @@ namespace MyPrivateChest.Frameworks
 
         private void BuildWidgets()
         {
-            this.Background = base.AddChild<Background>(new Background(Sprites.MenuBackground));
-            this.Body = base.AddChild<Widget>(new Widget());
-            this.TopRow = this.Body.AddChild<Widget>(new Widget());
-            this.NextButton = this.TopRow.AddChild<SpriteButton>(new SpriteButton(Sprites.RightArrow));
-            this.PrevButton = this.TopRow.AddChild<SpriteButton>(new SpriteButton(Sprites.LeftArrow));
-            this.NextButton.OnPress += delegate ()
-            {
-                this.CycleCategory(1);
-            };
-            this.PrevButton.OnPress += delegate ()
-            {
-                this.CycleCategory(-1);
-            };
-            this.CloseButton = base.AddChild<SpriteButton>(new SpriteButton(Sprites.ExitButton));
-            this.CloseButton.OnPress += delegate ()
-            {
-                Action onClose = this.OnClose;
-                if (onClose == null)
-                {
-                    return;
-                }
-                onClose();
-            };
-            this.CategoryLabel = this.TopRow.AddChild<Label>(new Label("", Color.Black, this.HeaderFont));
+            //this.Background = base.AddChild<Background>(new Background(Sprites.MenuBackground));
+            //this.Body = base.AddChild<Widget>(new Widget());
+            //this.TopRow = this.Body.AddChild<Widget>(new Widget());
+            //this.NextButton = this.TopRow.AddChild<SpriteButton>(new SpriteButton(Sprites.RightArrow));
+            //this.PrevButton = this.TopRow.AddChild<SpriteButton>(new SpriteButton(Sprites.LeftArrow));
+            //this.NextButton.OnPress += delegate ()
+            //{
+            //    this.CycleCategory(1);
+            //};
+            //this.PrevButton.OnPress += delegate ()
+            //{
+            //    this.CycleCategory(-1);
+            //};
+            //this.CloseButton = base.AddChild<SpriteButton>(new SpriteButton(Sprites.ExitButton));
+            //this.CloseButton.OnPress += delegate ()
+            //{
+            //    Action onClose = this.OnClose;
+            //    if (onClose == null)
+            //    {
+            //        return;
+            //    }
+            //    onClose();
+            //};
+            //this.CategoryLabel = this.TopRow.AddChild<Label>(new Label("", Color.Black, this.HeaderFont));
         }
 
         private void PositionElements()
         {
-            this.Body.Position = new Point(this.Background.Graphic.LeftBorderThickness, this.Background.Graphic.RightBorderThickness);
-            this.TopRow.Width = this.Body.Width;
-            base.Width = this.Body.Width + this.Background.Graphic.LeftBorderThickness + this.Background.Graphic.RightBorderThickness + this.Padding * 2;
-            int num = (int)this.HeaderFont.MeasureString(" Animal Product ").X;
-            this.NextButton.X = this.TopRow.Width / 2 + num / 2;
-            this.PrevButton.X = this.TopRow.Width / 2 - num / 2 - this.PrevButton.Width;
-            this.CategoryLabel.CenterHorizontally();
-            this.TopRow.Height = this.TopRow.Children.Max((Widget c) => c.Height);
-            foreach (Widget widget in this.TopRow.Children)
-            {
-                widget.Y = this.TopRow.Height / 2 - widget.Height / 2;
-            }
-            base.Height = this.Body.Height + this.Background.Graphic.TopBorderThickness + this.Background.Graphic.BottomBorderThickness + this.Padding * 2;
-            this.Background.Width = base.Width;
-            this.Background.Height = base.Height;
-            this.CloseButton.Position = new Point(base.Width - this.CloseButton.Width, 0);
+            //this.Body.Position = new Point(this.Background.Graphic.LeftBorderThickness, this.Background.Graphic.RightBorderThickness);
+            //this.TopRow.Width = this.Body.Width;
+            //base.Width = this.Body.Width + this.Background.Graphic.LeftBorderThickness + this.Background.Graphic.RightBorderThickness + this.Padding * 2;
+            //int num = (int)this.HeaderFont.MeasureString(" Animal Product ").X;
+            //this.NextButton.X = this.TopRow.Width / 2 + num / 2;
+            //this.PrevButton.X = this.TopRow.Width / 2 - num / 2 - this.PrevButton.Width;
+            //this.CategoryLabel.CenterHorizontally();
+            //this.TopRow.Height = this.TopRow.Children.Max((Widget c) => c.Height);
+            //foreach (Widget widget in this.TopRow.Children)
+            //{
+            //    widget.Y = this.TopRow.Height / 2 - widget.Height / 2;
+            //}
+            //base.Height = this.Body.Height + this.Background.Graphic.TopBorderThickness + this.Background.Graphic.BottomBorderThickness + this.Padding * 2;
+            //this.Background.Width = base.Width;
+            //this.Background.Height = base.Height;
+            //this.CloseButton.Position = new Point(base.Width - this.CloseButton.Width, 0);
         }
 
 
 
 
 
-        private void CycleCategory(int offset)
-        {
-            ChestIndex = Mod(ChestIndex + offset, AllPrivateChests.GetChests.Count);
-        }
+        //private void CycleCategory(int offset)
+        //{
+        //    ChestIndex = Mod(ChestIndex + offset, AllPrivateChests.GetChests.Count);
+        //}
 
 
 
 
-        public override bool ReceiveLeftClick(Point point)
-        {
-            base.PropagateLeftClick(point);
-            return true;
-        }
+        //public override bool ReceiveLeftClick(Point point)
+        //{
+        //    base.PropagateLeftClick(point);
+        //    return true;
+        //}
 
-        public override bool ReceiveScrollWheelAction(int amount)
-        {
-            this.CycleCategory((amount > 1) ? -1 : 1);
-            return true;
-        }
+        //public override bool ReceiveScrollWheelAction(int amount)
+        //{
+        //    this.CycleCategory((amount > 1) ? -1 : 1);
+        //    return true;
+        //}
 
-        private int Mod(int x, int m)
-        {
-            return (x % m + m) % m;
-        }
+
 
     }
 }

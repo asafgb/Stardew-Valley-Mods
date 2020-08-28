@@ -170,6 +170,20 @@ namespace ItemManager
             return this.PrototypeMap[itemKey];
         }
 
+        public Item GetItem(ItemKey itemKey,int QualityOrUpgradeLevel,int stack)
+        {
+            Item temp = this.PrototypeMap[itemKey];
+            if (temp as Tool != null) {
+                ((Tool)temp).UpgradeLevel = QualityOrUpgradeLevel;
+            }
+            else
+            {
+                ((StardewValley.Object)temp).Quality = QualityOrUpgradeLevel;
+            }
+            temp.Stack = stack;
+            return temp;
+        }
+
         public bool HasItem(ItemKey itemKey)
         {
             return this.PrototypeMap.ContainsKey(itemKey);

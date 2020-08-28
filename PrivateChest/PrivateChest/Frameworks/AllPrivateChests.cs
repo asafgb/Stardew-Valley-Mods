@@ -25,6 +25,10 @@ namespace LockChest.Frameworks
         private List<ItemKeeper> playerInventory;
         [JsonProperty]
         private GameTimeHandler timeHandler;
+
+        [JsonProperty]
+        private int currChestIndex;
+
         [JsonProperty]
         private string CharacterName;
 
@@ -37,12 +41,13 @@ namespace LockChest.Frameworks
         private readonly string TempSave;
         private readonly string AllDay;
 
-        public AllPrivateChests(IModHelper helper,int AmountOfChest)
+        public AllPrivateChests(IModHelper helper, int AmountOfChest)
         {
             // if run temp
             if (helper != null)
             {
                 this.helper = helper;
+                this.currChestIndex = 0;
                 lstChest = new List<ChestIdentity>();
                 for (int i = 0; i < AmountOfChest; i++)
                 {
@@ -58,8 +63,13 @@ namespace LockChest.Frameworks
         }
 
 
-        public List<ChestIdentity> GetChests { get { return this.lstChest; } }
+        //public List<ChestIdentity> GetChests { get { return this.lstChest; } }
 
+        public ChestIdentity getCurrentChestId { get { return this.lstChest[this.currChestIndex]; } }
+
+        public Chest GetCurrentChest { get { return this.lstChest[this.currChestIndex].GetChest; } }
+
+        public int CurrChestIndex { get { return this.currChestIndex; } }
 
         private void LoadSave()
         {
@@ -111,6 +121,15 @@ namespace LockChest.Frameworks
             return Isvalid;
         }
 
+        public void AddIndex(int offset)
+        {
+            this.currChestIndex = Mod(this.currChestIndex + offset, this.lstChest.Count);
+        }
+        private int Mod(int x, int m)
+        {
+            return (x % m + m) % m;
+        }
+
 
         private void SaveChest(string gameName)
         {
@@ -148,7 +167,7 @@ namespace LockChest.Frameworks
             this.playerInventory = temp.playerInventory;
         }
 
-        
+
 
     }
 }

@@ -14,6 +14,7 @@ namespace Menu.Widgets
 {
     public class LeftMenu : Widget
     {
+        private List<Widget> _UnMoveChildren = new List<Widget>();
 
         private int MaxWidgetDispay { get; set; } = 3;
         private int CurrentPrintIndex { get; set; } = 0;
@@ -39,6 +40,7 @@ namespace Menu.Widgets
 
         protected override void DrawChildren(SpriteBatch batch)
         {
+            PositionButtons(this.menu, MaxWidgetDispay);
             if (MaxWidgetDispay < 0 || this.Children.Count <= MaxWidgetDispay)
             {
                 foreach (Widget widget in this.Children)
@@ -48,7 +50,6 @@ namespace Menu.Widgets
             }
             else if (this.Children.Count >0)
             {
-                PositionButtons(this.menu, MaxWidgetDispay);
                 Widget lastChild = this.Children[CurrentPrintIndex % this.Children.Count];
                 int i = CurrentPrintIndex;
                 int CounterToDisplay = MaxWidgetDispay;
@@ -72,27 +73,7 @@ namespace Menu.Widgets
                 PlaceTheButton(DownArrow, lastChild);
                 DownArrow.Draw(batch);
 
-
-                //PositionButtons(this.menu, MaxWidgetDispay);
-                //Widget lastChild = this.Children[CurrentPrintIndex % this.Children.Count];
-                //int CounterToDisplay =  MaxWidgetDispay;
-                //for (int i = CurrentPrintIndex; CounterToDisplay>0; i++)
-                //{
-                //    if (this.Children[i % this.Children.Count].ShouldMove && CounterToDisplay>0)
-                //    {
-                //        CounterToDisplay--;
-                //        lastChild = this.Children[i % this.Children.Count];
-                //        lastChild.Draw(batch);
-
-                //    }
-                //    else
-                //    {
-                //        this.Children[i % this.Children.Count].Draw(batch);
-                //    }
-                //}
-                //CurrentPrintIndex %= this.Children.Count;
-                //PlaceTheButton(DownArrow, lastChild);
-                //DownArrow.Draw(batch);
+            
             }
         }
 
@@ -122,7 +103,7 @@ namespace Menu.Widgets
             WidgetDispay = Math.Min(WidgetDispay, this.Children.Count);
             Widget lastchild = null;
 
-            for (int i = CurrentPrintIndex; WidgetDispay > 0; i++)
+            for (int i = CurrentPrintIndex; WidgetDispay > 0 && i < CurrentPrintIndex+ this.Children.Count; i++)
             {
                 Widget child = this.Children[i % this.Children.Count];
                 if (child.ShouldMove)
@@ -175,6 +156,54 @@ namespace Menu.Widgets
             //return this.RootWidget.ReceiveScrollWheelAction(amount);
         }
 
+
+
+        public List<Widget> Children
+        {
+            get
+            {
+                return this._UnMoveChildren;
+            }
+        }
+
+        public int getChildIndex(Widget child)
+        {
+            return this._UnMoveChildren.IndexOf(child);
+        }
+
+
+
+        public T AddChild<T>(T child, int InsertIndex = -1) where T : Widget
+        {
+            child.Parent = this;
+            if (InsertIndex >= 0)
+                this._UnMoveChildren.Insert(InsertIndex, child);
+            else
+                this._UnMoveChildren.Add(child);
+            this.OnContentsChanged();
+            return child;
+        }
+
+
+        public void RemoveChild(Widget child)
+        {
+            this._UnMoveChildren.Remove(child);
+            child.Parent = null;
+            this.OnContentsChanged();
+        }
+
+        public void RemoveChildren()
+        {
+            this.RemoveChildren((Widget c) => true);
+        }
+
+        public void RemoveChildren(Predicate<Widget> shouldRemove)
+        {
+            foreach (Widget widget in this.Children.Where<Widget>((Func<Widget, bool>)(c => shouldRemove(c))))
+                widget.Parent = (Widget)null;
+            this._UnMoveChildren.RemoveAll(shouldRemove);
+            this.OnContentsChanged();
+        }
 
     }
 }

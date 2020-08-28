@@ -111,6 +111,7 @@ namespace Menu.Widgets
             return this._Children.IndexOf(child);
         }
 
+
         public virtual void Draw(SpriteBatch batch)
         {
             this.DrawChildren(batch);
@@ -183,7 +184,7 @@ namespace Menu.Widgets
             return this.PropagateScrollWheelAction(amount);
         }
 
-        public bool ShouldMove { get; set; } = true;
+        //public bool ShouldMove { get; set; } = true;
 
         protected bool PropagateKeyPress(Keys input)
         {

@@ -17,6 +17,14 @@ namespace MyPrivateChest.Frameworks
             base.Width = this.TextureRegion.Width;
             base.Height = this.TextureRegion.Height;
         }
+        public SpriteButton(TextureRegion textureRegion,int width,int height)
+        {
+            this.TextureRegion = textureRegion;
+            base.Width = width;
+            base.Height = height;
+        }
+
+
 
         public override void Draw(SpriteBatch batch)
         {

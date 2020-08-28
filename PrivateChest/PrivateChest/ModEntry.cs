@@ -77,7 +77,7 @@ namespace LockChest
             if((itemGrabMenu = (e.NewMenu as ItemGrabMenu)) != null) // && ChestMenu.Instance.currentMenu == e.OldMenu
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
-                ChestOverlay child = new ChestOverlay(itemGrabMenu,this.gameSave, this.Config,this.helper);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
+                ChestOverlay child = new ChestOverlay(itemGrabMenu,this.gameSave,this.helper);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
             }
         }
 

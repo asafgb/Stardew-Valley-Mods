@@ -29,10 +29,14 @@ namespace LockChest.Interface.Widgets
         public Chest GetChest {
             get
             {
-                List<Item> lsttemp=Inventory.Select(itemkeeper => ItemDataManager.Instance.GetItem(itemkeeper.itemKey)).ToList();
+                List<Item> lsttemp=Inventory.Select(itemkeeper => ItemDataManager.Instance.GetItem(itemkeeper.itemKey, itemkeeper.QualityOrUpgradeLevel, itemkeeper.Stack)).ToList();
                 Chest cst = new Chest(0, lsttemp, new Vector2(0, 0), false,0);
                 return cst;
             }
+        }
+        public void SetInventory(List<ItemKeeper> Inventory)
+        {
+            this.Inventory = Inventory;
         }
     }
 }

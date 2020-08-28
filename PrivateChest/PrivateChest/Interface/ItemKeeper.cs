@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace LockChest.Interface
 {
     [JsonObject(MemberSerialization.OptIn)]
-    internal class ItemKeeper
+    public class ItemKeeper
     {
         [JsonProperty]
         public ItemKey itemKey;

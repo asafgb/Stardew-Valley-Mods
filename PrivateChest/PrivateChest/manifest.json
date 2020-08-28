@@ -1,9 +1,9 @@
 {
-  "Name": "MyPrivateChest",
+  "Name": "PrivateChest",
   "Author": "Asafgb",
   "Version": "1.0.0",
   "Description": "Lock The Chest from other players",
-  "UniqueID": "Asafgb.MyPrivateChest",
-  "EntryDll": "MyPrivateChest.dll",
+  "UniqueID": "Asafgb.PrivateChest",
+  "EntryDll": "PrivateChest.dll",
   "MinimumApiVersion": "3.0.0"
 }
