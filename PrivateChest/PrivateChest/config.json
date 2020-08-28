@@ -1,0 +1,6 @@
+{
+  "CheckForUpdates": true,
+  "GithubUrlForProjectManifest": "https://raw.githubusercontent.com/asafgb/Stardew-Valley-Mods/master/LockChest/LockChest/manifest.json",
+  "AmountOfChest": 3
+
+}
