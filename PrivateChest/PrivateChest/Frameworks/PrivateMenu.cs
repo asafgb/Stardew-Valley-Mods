@@ -66,7 +66,7 @@ namespace MyPrivateChest.Frameworks
         }
 
 
-        public void OpenMenu(AllPrivateChests allPrivateChests, int ChestIndex)
+        public void OpenMenu(AllPrivateChests allPrivateChests)
         {
             this.allPrivateChests = allPrivateChests;
             //Game1.exitActiveMenu();

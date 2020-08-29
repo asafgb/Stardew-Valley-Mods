@@ -98,14 +98,17 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
             this.CategoryMenu = new CategoryMenu(chestData, this.ItemDataManager, this.TooltipManager);
             this.CategoryMenu.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + this.ItemGrabMenu.width / 2 - this.CategoryMenu.Width / 2 - 6 * Game1.pixelZoom, this.ItemGrabMenu.yPositionOnScreen - 10 * Game1.pixelZoom);
             this.CategoryMenu.OnClose += this.CloseCategoryMenu;
-            ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).AddUnMoveChild<CategoryMenu>(this.CategoryMenu);
+            base.AddChild<CategoryMenu>(this.CategoryMenu);
+            
+            //((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).AddUnMoveChild<CategoryMenu>(this.CategoryMenu);
             //base.AddChild<CategoryMenu>(this.CategoryMenu);
             this.SetItemsClickable(false);
         }
 
         private void CloseCategoryMenu()
         {
-            ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).RemoveUnMoveChild(this.CategoryMenu);
+            //((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).RemoveUnMoveChild(this);
+            base.RemoveChild(this.CategoryMenu);
             this.CategoryMenu = null;
             this.SetItemsClickable(true);
         }

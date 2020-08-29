@@ -220,9 +220,8 @@ namespace Menu.Widgets
         {
             foreach (Widget widget in this.Children)
             {
-
                 Point point2 = new Point(point.X - widget.Position.X, point.Y - widget.Position.Y);
-                if (widget.LocalBounds.Contains(point2) && widget.ReceiveLeftClick(point2))
+                if (widget.ReceiveLeftClick(point2))
                 {
                     return true;
                 }

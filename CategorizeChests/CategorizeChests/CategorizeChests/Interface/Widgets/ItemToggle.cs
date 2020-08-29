@@ -57,8 +57,12 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 
         public override bool ReceiveLeftClick(Point point)
         {
-            this.Toggle();
-            return true;
+            if (this.LocalBounds.Contains(point))
+            {
+                this.Toggle();
+                return true;
+            }
+            return false;
         }
 
         private readonly IItemDataManager ItemDataManager;

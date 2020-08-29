@@ -2,6 +2,7 @@
 using ItemManager.interfaces;
 using LockChest.Interface;
 using LockChest.Interface.Widgets;
+using MyPrivateChest.Frameworks;
 using Newtonsoft.Json;
 using StardewModdingAPI;
 using StardewValley;
@@ -124,6 +125,7 @@ namespace LockChest.Frameworks
         public void AddIndex(int offset)
         {
             this.currChestIndex = Mod(this.currChestIndex + offset, this.lstChest.Count);
+            new PrivateMenu(helper.Reflection).OpenMenu(this);
         }
         private int Mod(int x, int m)
         {

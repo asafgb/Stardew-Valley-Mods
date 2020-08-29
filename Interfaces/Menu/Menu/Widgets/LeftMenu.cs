@@ -124,9 +124,7 @@ namespace Menu.Widgets
 
         public override bool ReceiveLeftClick(Point point)
         {
-            Point point2 = new Point(point.X - DownArrow.Position.X, point.Y - DownArrow.Position.Y);
-
-            return DownArrow.ReceiveLeftClick(point2) || base.ReceiveLeftClick(point);
+            return DownArrow.ReceiveLeftClick(point) || base.ReceiveLeftClick(point)  || _UnMoveChildren.ToList().Any(wid=>wid.ReceiveLeftClick(point));
             //return base.ReceiveLeftClick(new Point(x, y));
         }
 

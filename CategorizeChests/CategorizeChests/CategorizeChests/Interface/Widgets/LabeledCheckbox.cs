@@ -28,13 +28,17 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 
 				public override bool ReceiveLeftClick(Point point)
 		{
-			this.Checked = !this.Checked;
-			Action<bool> onChange = this.OnChange;
-			if (onChange != null)
-			{
-				onChange(this.Checked);
-			}
-			return true;
+            if (this.LocalBounds.Contains(point) )
+            {
+                this.Checked = !this.Checked;
+                Action<bool> onChange = this.OnChange;
+                if (onChange != null)
+                {
+                    onChange(this.Checked);
+                }
+                return true;
+            }
+            return false;
 		}
 
 				public override void Draw(SpriteBatch batch)

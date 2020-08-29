@@ -27,8 +27,8 @@ namespace LockChest.Interface.Widgets
         private Widget Body;
         private Widget TopRow;
         private SpriteButton PrevButton;
+        private Label ChestIndex;
         private SpriteButton NextButton;
-        Background test;
 
 
         public ChestOverlay(ItemGrabMenu menu, AllPrivateChests allPrivateChests,IModHelper helper)// IChestDataManager chestDataManager, IChestFiller chestFiller, IItemDataManager itemDataManager, ITooltipManager tooltipManager
@@ -60,11 +60,9 @@ namespace LockChest.Interface.Widgets
                 ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).PositionButtons(this.ItemGrabMenu);
             }else if (ChestMenu.Instance.chest as PrivateMenu != null)
             {
-                test = temp.AddUnMoveChild<Background>(new Background(Sprites.MenuBackground));
-                Body = temp.AddUnMoveChild<Widget>(new Widget());
-                TopRow = Body.AddChild<Widget>(new Widget());
-                NextButton = TopRow.AddChild<SpriteButton>(new SpriteButton(Sprites.RightArrow));
-                PrevButton = TopRow.AddChild<SpriteButton>(new SpriteButton(Sprites.LeftArrow));
+                NextButton = temp.AddUnMoveChild<SpriteButton>(new SpriteButton(Sprites.RightArrow));
+                ChestIndex = temp.AddUnMoveChild<Label>(new Label($"{this.AllPrivateChests.CurrChestIndex+1}", Color.Black));
+                PrevButton = temp.AddUnMoveChild<SpriteButton>(new SpriteButton(Sprites.LeftArrow));
                 NextButton.OnPress += delegate ()
                 {
                     this.AllPrivateChests.AddIndex(1);
@@ -73,51 +71,21 @@ namespace LockChest.Interface.Widgets
                 {
                     this.AllPrivateChests.AddIndex(-1);
                 };
-                //TopRow.ShouldMove = false;
-                //NextButton.ShouldMove = false;
-                //PrevButton.ShouldMove = false;
                 this.PositionElements();
             }
         }
 
         private void PositionElements()
         {
-            //this.Background.Position =new Point(this.ItemGrabMenu.xPositionOnScreen, this.ItemGrabMenu.yPositionOnScreen - 100);
-            this.Body.Position = new Point(this.ItemGrabMenu.xPositionOnScreen+128, this.ItemGrabMenu.yPositionOnScreen - 45);
-            this.Body.Width = 12*48;
-            this.TopRow.Width = this.Body.Width;
-            base.Width = this.Body.Width + this.Body.Width + this.Body.Width + this.Padding * 2;
-            int num = 840;
-            this.NextButton.X = this.TopRow.Width / 2 + num / 2;
-            this.PrevButton.X = this.TopRow.Width / 2 - num / 2 - this.PrevButton.Width;
-            //this.CategoryLabel.CenterHorizontally();
-            this.TopRow.Height = this.TopRow.Children.Max((Widget c) => c.Height);
-            foreach (Widget widget in this.TopRow.Children)
-            {
-                widget.Y = this.TopRow.Height / 2 - widget.Height / 2;
-                widget.Height /= 2;
-                widget.Width /= 2;
-            }
-            //Amount.Position = new Point((this.NextButton.X + this.PrevButton.X) / 2, this.NextButton.Y);
-
-            this.Body.Height = 64;
-            //base.Height = this.Body.Height + this.Background.Graphic.TopBorderThickness + this.Background.Graphic.BottomBorderThickness + this.Padding * 2;
+            this.NextButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen + 836, this.ItemGrabMenu.yPositionOnScreen - 45);
+            this.PrevButton.Position = new Point(this.ItemGrabMenu.xPositionOnScreen -48, this.ItemGrabMenu.yPositionOnScreen - 45);
+            this.ChestIndex.Position = new Point((this.NextButton.X + this.PrevButton.X) / 2, (this.NextButton.Y+5));
         }
 
 
         private void OpenMenu()
         {
-            new PrivateMenu(helper.Reflection).OpenMenu(this.AllPrivateChests, 1);
+            new PrivateMenu(helper.Reflection).OpenMenu(this.AllPrivateChests);
         }
-
-
-        private int Padding
-        {
-            get
-            {
-                return 2 * Game1.pixelZoom;
-            }
-        }
-
     }
 }

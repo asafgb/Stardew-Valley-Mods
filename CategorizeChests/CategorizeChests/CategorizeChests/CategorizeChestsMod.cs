@@ -12,6 +12,7 @@ using StardewValleyMods.CategorizeChests.Interface.Widgets;
 using StardewValleyMods.Common;
 using ItemManager.interfaces;
 using ItemManager;
+using Menu.Widgets;
 
 namespace StardewValleyMods.CategorizeChests
 {
@@ -101,6 +102,7 @@ namespace StardewValleyMods.CategorizeChests
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
                 ChestOverlay child = new ChestOverlay(itemGrabMenu, ChestMenu.Instance.chest, this.Config, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, ChestMenu.Instance.WidgetHost.TooltipManager);
+                ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).AddUnMoveChild<ChestOverlay>(child);
             }
         }
 

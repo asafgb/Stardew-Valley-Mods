@@ -186,8 +186,7 @@ namespace StardewValleyMods.CategorizeChests.Interface.Widgets
 
         public override bool ReceiveLeftClick(Point point)
         {
-            base.PropagateLeftClick(point);
-            return true;
+            return base.PropagateLeftClick(point);
         }
 
         public override bool ReceiveScrollWheelAction(int amount)
