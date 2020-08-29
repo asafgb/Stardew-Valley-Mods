@@ -106,15 +106,24 @@ namespace LockChest.Frameworks
             for (int i = 0; i < Game1.player.Items.Count; i++)
             {
                 Item item = Game1.player.Items[i];
+                // If the item in that location is not emepty
                 if (item != null)
                 {
-                    Item fromList = ItemDataManager.Instance.GetItem(playerInventory[i].itemKey);
+                    // If the location is empty but the Item(in Game) not emptyu
+                    if (playerInventory[i] != null)
+                    {
+                        Item fromList = ItemDataManager.Instance.GetItem(playerInventory[i].itemKey);
 
-                    Isvalid = Isvalid &&
-                               item.ParentSheetIndex == fromList.ParentSheetIndex &&
-                               item.GetType() == fromList.GetType() &&
-                               item.Stack == playerInventory[i].Stack;
+                        Isvalid = Isvalid &&
+                                   item.ParentSheetIndex == fromList.ParentSheetIndex &&
+                                   item.GetType() == fromList.GetType() &&
+                                   item.Stack == playerInventory[i].Stack;
+                    }
+                    // So they not same
+                    else                   
+                    return false;
                 }
+                // If empty check if the location in the Save file as same
                 else
                     Isvalid = Isvalid && playerInventory[i] == null;
             }

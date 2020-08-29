@@ -73,7 +73,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Interfaces\Menu\Menu\Menu.csproj">
+    <ProjectReference Include="..\..\..\Interfaces\Menu\Menu\Menu.csproj">
       <Project>{118b2447-1ff6-4a6d-83b7-6d43f048801c}</Project>
       <Name>Menu</Name>
     </ProjectReference>

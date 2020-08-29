@@ -15,7 +15,7 @@ namespace Menu.Widgets
         public override bool ReceiveLeftClick(Point point)
         {
             // Check 
-            if ( this.LocalBounds.Contains(point) || this.GlobalBounds.Contains(point))
+            if ( this.LocalBounds.Contains(point) )
             {
                 this.OnPress?.Invoke();
                 return true;

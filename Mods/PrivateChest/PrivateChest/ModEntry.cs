@@ -4,6 +4,7 @@ using LockChest.Interface;
 using LockChest.Interface.Widgets;
 using Menu;
 using Menu.Common;
+using Menu.Widgets;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
@@ -78,6 +79,7 @@ namespace LockChest
             {
                 ChestMenu.Instance.CreateMenu(itemGrabMenu);
                 ChestOverlay child = new ChestOverlay(itemGrabMenu,this.gameSave,this.helper);//, this.ChestDataManager, this.ChestFiller, this.ItemDataManager, this.WidgetHost.TooltipManager);
+                ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).AddUnMoveChild(child);
             }
         }
 

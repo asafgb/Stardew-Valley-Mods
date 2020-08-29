@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Menu.Common
 {
-    public static class Stat
+    internal static class Stat
     {
         public static IModHelper helper { get; set; }
     }

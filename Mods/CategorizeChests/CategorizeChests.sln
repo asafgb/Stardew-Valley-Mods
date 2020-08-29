@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CategorizeChests", "CategorizeChests\CategorizeChests.csproj", "{06BE2B07-D98B-4D6D-ACB9-E1DE14493A92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu", "..\Interfaces\Menu\Menu\Menu.csproj", "{118B2447-1FF6-4A6D-83B7-6D43F048801C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu", "..\..\Interfaces\Menu\Menu\Menu.csproj", "{118B2447-1FF6-4A6D-83B7-6D43F048801C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

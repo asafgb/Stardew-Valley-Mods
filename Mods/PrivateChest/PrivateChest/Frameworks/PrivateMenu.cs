@@ -18,31 +18,10 @@ using Background = Menu.Widgets.Background;
 
 namespace MyPrivateChest.Frameworks
 {
-    internal class PrivateMenu : Chest
+    public class PrivateMenu : Chest
     {
-        //public event Action OnClose;
-        private Chest CurrChest;
         AllPrivateChests allPrivateChests;
         private readonly IReflectionHelper Reflection;
-
-        //private Widget Body;
-
-        //private Widget TopRow;
-
-        //private SpriteButton CloseButton;
-
-        //private Background Background;
-
-        //private Label CategoryLabel;
-
-        //private SpriteButton PrevButton;
-
-        //private SpriteButton NextButton;
-
-        //
-
-
-        //private string SelectedCategory;
 
 
         private SpriteFont HeaderFont
@@ -60,23 +39,24 @@ namespace MyPrivateChest.Frameworks
                 return 2 * Game1.pixelZoom;
             }
         }
-        public PrivateMenu(IReflectionHelper Reflection)
+        public PrivateMenu(IReflectionHelper Reflection) 
         {
             this.Reflection = Reflection;
+            
         }
 
 
-        public void OpenMenu(AllPrivateChests allPrivateChests)
+        public void OpenMenu(AllPrivateChests allPrivateChests) 
         {
             this.allPrivateChests = allPrivateChests;
             //Game1.exitActiveMenu();
-            CurrChest = allPrivateChests.GetCurrentChest;
+            this.items.AddRange(allPrivateChests.GetCurrentChest.items);
             IClickableMenu menu;
             switch (Constants.TargetPlatform)
             {
                 case GamePlatform.Android:
                     menu = new ItemGrabMenu(
-                    inventory: CurrChest.items,
+                    inventory: this.items,
                     reverseGrab: true,
                     showReceivingMenu: true,
                     highlightFunction: this.CanAcceptItem,
@@ -86,13 +66,13 @@ namespace MyPrivateChest.Frameworks
                     canBeExitedWithKey: true,
                     showOrganizeButton: true,
                     source: ItemGrabMenu.source_chest,
-                    sourceItem: CurrChest,
-                    context: CurrChest);
+                    sourceItem: this,
+                    context: this);
                     break;
 
                 default:
                     menu = new ItemGrabMenu(
-                    inventory: CurrChest.items,
+                    inventory: this.items,
                     reverseGrab: false,
                     showReceivingMenu: true,
                     highlightFunction: this.CanAcceptItem,
@@ -102,8 +82,8 @@ namespace MyPrivateChest.Frameworks
                     canBeExitedWithKey: true,
                     showOrganizeButton: true,
                     source: ItemGrabMenu.source_chest,
-                    sourceItem: CurrChest,
-                    context: CurrChest);
+                    sourceItem: this,
+                    context: this);
                     break;
 
             }
@@ -111,17 +91,21 @@ namespace MyPrivateChest.Frameworks
 
         }
 
-        private void GrabItemFromPlayer(Item item, Farmer player)
+        public override void grabItemFromInventory(Item item, Farmer player)
         {
-            CurrChest.grabItemFromInventory(item, player);
+            this.GrabItemFromPlayer(item, player);
+        }
+
+        public void GrabItemFromPlayer(Item item, Farmer player)
+        {
+            base.grabItemFromInventory(item, player);
             
             this.OnChanged();
         }
 
-
-        private void GrabItemFromContainer(Item item, Farmer player)
+        public void GrabItemFromContainer(Item item, Farmer player)
         {
-            CurrChest.grabItemFromChest(item, player);
+            this.grabItemFromChest(item, player);
             this.OnChanged();
         }
 
@@ -131,7 +115,7 @@ namespace MyPrivateChest.Frameworks
             {
                 ((ItemGrabMenu)Game1.activeClickableMenu).behaviorOnItemGrab = this.GrabItemFromContainer;
                 this.Reflection.GetField<ItemGrabMenu.behaviorOnItemSelect>(Game1.activeClickableMenu, "behaviorFunction").SetValue(this.GrabItemFromPlayer);
-                List<ItemKeeper> keepers= this.CurrChest.items.Select(itm => new ItemKeeper(ItemDataManager.Instance.GetKey(itm),
+                List<ItemKeeper> keepers= this.items.Select(itm => new ItemKeeper(ItemDataManager.Instance.GetKey(itm),
                     itm as Tool != null ? ((Tool)itm).UpgradeLevel : ((StardewValley.Object)itm).Quality,itm.Stack)).ToList();
                 this.allPrivateChests.getCurrentChestId.SetInventory(keepers);
                 //allPrivateChests.SaveTemp();

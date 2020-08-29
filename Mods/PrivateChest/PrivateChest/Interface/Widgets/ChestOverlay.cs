@@ -51,7 +51,7 @@ namespace LockChest.Interface.Widgets
 
         private void AddButtons(int indexToPut = -1)
         {
-            LeftMenu temp = ChestMenu.Instance.WidgetHost.RootWidget as LeftMenu;
+            //LeftMenu temp = ChestMenu.Instance.WidgetHost.RootWidget as LeftMenu;
             if (Game1.player.currentLocation.ToString() == "StardewValley.Locations.FarmHouse" && ChestMenu.Instance.chest as PrivateMenu == null)
             {
                 this.OpenMyPrivateChest = new TextButton("Private Chests", Sprites.LeftProtrudingTab);
@@ -60,9 +60,9 @@ namespace LockChest.Interface.Widgets
                 ((LeftMenu)ChestMenu.Instance.WidgetHost.RootWidget).PositionButtons(this.ItemGrabMenu);
             }else if (ChestMenu.Instance.chest as PrivateMenu != null)
             {
-                NextButton = temp.AddUnMoveChild<SpriteButton>(new SpriteButton(Sprites.RightArrow));
-                ChestIndex = temp.AddUnMoveChild<Label>(new Label($"{this.AllPrivateChests.CurrChestIndex+1}", Color.Black));
-                PrevButton = temp.AddUnMoveChild<SpriteButton>(new SpriteButton(Sprites.LeftArrow));
+                NextButton = base.AddChild<SpriteButton>(new SpriteButton(Sprites.RightArrow));
+                ChestIndex = base.AddChild<Label>(new Label($"{this.AllPrivateChests.CurrChestIndex+1}", Color.Black));
+                PrevButton = base.AddChild<SpriteButton>(new SpriteButton(Sprites.LeftArrow));
                 NextButton.OnPress += delegate ()
                 {
                     this.AllPrivateChests.AddIndex(1);

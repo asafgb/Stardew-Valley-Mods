@@ -14,13 +14,14 @@ namespace Menu
 {
     public class ChestMenu /*: Mod*/
     {
-        //private IModHelper Helper;
+
+
         private Mutex mut = new Mutex();
         private Config Config;
 
 
         public Chest chest { get; private set; }
-        public static ChestMenu Instance { get; private set; } = new ChestMenu();
+        public static ChestMenu Instance { get; private set; } 
         public WidgetHost WidgetHost { get; private set; }
         private ItemGrabMenu currentMenu;
         private bool AlreadyRemoveChildrenOnce = false;
@@ -42,8 +43,8 @@ namespace Menu
 
         public void InitInstance(IModHelper helper)
         {
-
-            if(Stat.helper == null)
+            Instance = this;
+            if (Stat.helper == null)
             {
                 Stat.helper = helper;
 

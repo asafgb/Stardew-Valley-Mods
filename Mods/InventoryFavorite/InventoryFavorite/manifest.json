@@ -1,0 +1,9 @@
+﻿{
+  "Name": "InventoryFavorite",
+  "Author": "Asafgb",
+  "Version": "1.0.0",
+  "Description": "Favorite Items for not stack",
+  "UniqueID": "Asafgb.InventoryFavorite",
+  "EntryDll": "InventoryFavorite.dll",
+  "MinimumApiVersion": "3.0.0"
+}
