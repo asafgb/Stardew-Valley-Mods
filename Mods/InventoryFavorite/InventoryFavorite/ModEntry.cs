@@ -1,4 +1,5 @@
-﻿using StardewModdingAPI;
+﻿using Harmony;
+using StardewModdingAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace InventoryFavorite
 {
     public class ModEntry : Mod
     {
+        internal static ModEntry Instance { get; private set; }
+        internal HarmonyInstance Harmony { get; private set; }
         public ModEntry()
         {
         }

@@ -19,9 +19,9 @@ namespace Menu
         private Mutex mut = new Mutex();
         private Config Config;
 
-
+        public IModHelper helper { get; set; }
         public Chest chest { get; private set; }
-        public static ChestMenu Instance { get; private set; } 
+        public static ChestMenu Instance { get; private set; } = new ChestMenu();
         public WidgetHost WidgetHost { get; private set; }
         private ItemGrabMenu currentMenu;
         private bool AlreadyRemoveChildrenOnce = false;
@@ -44,25 +44,24 @@ namespace Menu
         public void InitInstance(IModHelper helper)
         {
             Instance = this;
-            if (Stat.helper == null)
-            {
-                Stat.helper = helper;
+            Instance.helper = helper;
 
-                Stat.helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
-                Stat.helper.Events.GameLoop.GameLaunched += GameLoop_GameLaunched;
-            }
+            Instance.helper = helper;
+
+            Instance.helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+            Instance.helper.Events.GameLoop.GameLaunched += GameLoop_GameLaunched;
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
         {
-            Stat.helper.Events.GameLoop.SaveLoaded -= GameLoop_SaveLoaded;
-            
-            Stat.helper.Events.Display.MenuChanged += Display_MenuChanged;
+            Instance.helper.Events.GameLoop.SaveLoaded -= GameLoop_SaveLoaded;
+
+            Instance.helper.Events.Display.MenuChanged += Display_MenuChanged;
         }
 
         private void GameLoop_GameLaunched(object sender, StardewModdingAPI.Events.GameLaunchedEventArgs e)
         {
-            Stat.helper.Content.AssetEditors.Add(new MiscEditor(Stat.helper));
+            Instance.helper.Content.AssetEditors.Add(new MiscEditor(ChestMenu.Instance.helper));
         }
 
         private void Display_MenuChanged(object sender, StardewModdingAPI.Events.MenuChangedEventArgs e)
@@ -83,7 +82,7 @@ namespace Menu
                 if (chest != null)
                 {
                     this.chest = chest;
-                    this.WidgetHost = new WidgetHost(Stat.helper);
+                    this.WidgetHost = new WidgetHost(Instance.helper);
                 }
             }
 

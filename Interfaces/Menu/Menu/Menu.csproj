@@ -52,7 +52,6 @@
     <Compile Include="ChestMenu.cs" />
     <Compile Include="Common\Config.cs" />
     <Compile Include="Common\MiscEditor.cs" />
-    <Compile Include="Common\Stat.cs" />
     <Compile Include="Interfaces\InterfaceHost.cs" />
     <Compile Include="Interfaces\ITooltipManager.cs" />
     <Compile Include="Interfaces\NineSlice.cs" />

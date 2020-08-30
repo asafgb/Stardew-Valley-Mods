@@ -15,11 +15,11 @@ namespace Menu.Interfaces
         public virtual void Dispose()
         {
 
-            Stat.helper.Events.Display.RenderedActiveMenu -= Display_RenderedActiveMenu;
-            Stat.helper.Events.GameLoop.UpdateTicked -= GameLoop_UpdateTicked;
-            Stat.helper.Events.Input.ButtonPressed -= Input_ButtonPressed;
-            Stat.helper.Events.Input.CursorMoved -= Input_CursorMoved;
-            Stat.helper.Events.Input.MouseWheelScrolled -= Input_MouseWheelScrolled;
+            ChestMenu.Instance.helper.Events.Display.RenderedActiveMenu -= Display_RenderedActiveMenu;
+            ChestMenu.Instance.helper.Events.GameLoop.UpdateTicked -= GameLoop_UpdateTicked;
+            ChestMenu.Instance.helper.Events.Input.ButtonPressed -= Input_ButtonPressed;
+            ChestMenu.Instance.helper.Events.Input.CursorMoved -= Input_CursorMoved;
+            ChestMenu.Instance.helper.Events.Input.MouseWheelScrolled -= Input_MouseWheelScrolled;
         }
 
         protected InterfaceHost(Func<bool> keepAlive = null) // IModHelper helper, 
@@ -28,11 +28,11 @@ namespace Menu.Interfaces
             this.KeepAliveCheck = keepAlive;
             this.LastViewport = new xTile.Dimensions.Rectangle(Game1.viewport.X, Game1.viewport.Y, Game1.viewport.Width, Game1.viewport.Height);
 
-            Stat.helper.Events.Display.RenderedActiveMenu += Display_RenderedActiveMenu;
-            Stat.helper.Events.GameLoop.UpdateTicked += GameLoop_UpdateTicked;
-            Stat.helper.Events.Input.ButtonPressed += Input_ButtonPressed;
-            Stat.helper.Events.Input.CursorMoved += Input_CursorMoved;
-            Stat.helper.Events.Input.MouseWheelScrolled += Input_MouseWheelScrolled;
+            ChestMenu.Instance.helper.Events.Display.RenderedActiveMenu += Display_RenderedActiveMenu;
+            ChestMenu.Instance.helper.Events.GameLoop.UpdateTicked += GameLoop_UpdateTicked;
+            ChestMenu.Instance.helper.Events.Input.ButtonPressed += Input_ButtonPressed;
+            ChestMenu.Instance.helper.Events.Input.CursorMoved += Input_CursorMoved;
+            ChestMenu.Instance.helper.Events.Input.MouseWheelScrolled += Input_MouseWheelScrolled;
 
         }
 
